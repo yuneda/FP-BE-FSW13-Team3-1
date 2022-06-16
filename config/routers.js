@@ -1,6 +1,8 @@
 const express = require("express");
 const controllers = require("../app/controllers");
-// const middlewares = require("../app/middlewares");/
+const uploadOnMemory = require('../app/middlewares/uploadOnMemory.')
+const upload = require('../app/middlewares/upload')
+const cloudinary = require('../app/middlewares/cloudinary')
 
 // const swaggerUi = require("swagger-ui-express");
 // const swaggerDocument = require("../data/swagger.json");
@@ -23,6 +25,29 @@ appRouter.post(
   "/api/v1/product",
   // middlewares.checkCondition.checkCondition,
   controllers.api.v1.productController.create
+);
+
+appRouter.put(
+  "/api/v1/users/:id/picture/cloudinary",
+  uploadOnMemory.single("picture"),
+  (req, res) => {
+    const fileBase64 = req.file.buffer.toString("base64");
+    const file = `data:${req.file.mimetype};base64,${fileBase64}`;
+
+    cloudinary.uploader.upload(file, function (err, result) {
+      if (!!err) {
+        console.log(err);
+        return res.status(400).json({
+          message: "Gagal upload file!",
+        });
+      }
+
+      res.status(201).json({
+        message: "Upload image berhasil",
+        url: result.url,
+      });
+    });
+  }
 );
 
 appRouter.get(
@@ -75,3 +100,4 @@ appRouter.use(controllers.main.onLost);
 appRouter.use(controllers.main.onError);
 
 module.exports = appRouter;
+

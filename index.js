@@ -4,7 +4,7 @@ const app = express()
 const port = process.env.PORT
 
 app.get('/', (req, res) => {
-    res.send('GG!')
+    res.send('YUNEDA TEAM !')
   })
   
   app.listen(port, () => {

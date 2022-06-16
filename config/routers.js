@@ -31,6 +31,13 @@ appRouter.get(
   controllers.api.v1.productController.list
 );
 
+// OFFER ROUTE
+appRouter.post(
+  "/api/v1/offer",
+  // middlewares.checkCondition.checkCondition,
+  controllers.api.v1.offerController.create
+);
+
 
 // Open API Document
 // apiRouter.use("/api-docs", swaggerUi.serve);

@@ -1,0 +1,390 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Second Hand",
+    "description": "OpenAPI for Second Hand",
+    "version": "1",
+    "contact": {
+      "name": "FSW13 Team 3"
+    },
+    "license": {
+      "name": "APACHE 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    },
+    {
+      "name": "Product",
+      "description": "API for product in the system"
+    },
+    {
+      "name": "Offer",
+      "description": "API for offer in the system"
+    }
+  ],
+  "servers": [
+    {
+      "description": "Product Management API Server",
+      "url": "http://localhost:3000/{env}",
+      "variables": {
+        "env": {
+          "description": "Server Environment",
+          "default": "api/v1",
+          "enum": [
+            "api/v1",
+            "dev"
+          ]
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://swagger.io/docs/specification/about/",
+    "description": "OpenAPI Guide"
+  },
+  "paths": {
+    "/product": {
+      "get": {
+        "security": [],
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get All Product",
+        "description": "Get all product in system",
+        "responses": {
+          "200": {
+            "description": "Success get all products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "id_user": {
+                        "type": "integer"
+                      },
+                      "product_name": {
+                        "type": "string"
+                      },
+                      "product_price": {
+                        "type": "integer"
+                      },
+                      "category": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "image": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "description": "Example success get all product",
+                    "value": [
+                      {
+                        "id": 1,
+                        "id_user": 1,
+                        "product_name": "Jam Tangan Casio",
+                        "product_price": 250000,
+                        "category": "Aksesoris",
+                        "description": "Hitam",
+                        "image": "./images/min.jpg",
+                        "status": "available"
+                      },
+                      {
+                        "id": 2,
+                        "id_user": 2,
+                        "product_name": "Jam Tangan Casio X",
+                        "product_price": 280000,
+                        "category": "Aksesoris",
+                        "description": "Putih",
+                        "image": "./images/min.jpg",
+                        "status": "available"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [],
+        "tags": [
+          "Product"
+        ],
+        "summary": "Create New Product",
+        "description": "Create a product",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductSchemaReqBody"
+              },
+              "examples": {
+                "products": {
+                  "value": {
+                    "id_user": 3,
+                    "product_name": "Jam Tangan Casio Y",
+                    "product_price": 280000,
+                    "category": "Aksesoris",
+                    "description": "Putih",
+                    "image": "./images/min.jpg",
+                    "status": "available"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succes create new product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create new user",
+        "description": "Create new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success creating new user"
+          }
+        }
+      }
+    },
+    "/offer": {
+      "get": {
+        "security": [],
+        "tags": [
+          "Offer"
+        ],
+        "summary": "Get All Offer",
+        "description": "Get all offer in system",
+        "responses": {
+          "200": {
+            "description": "Success get all offer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "id_user": {
+                        "type": "integer"
+                      },
+                      "id_product": {
+                        "type": "integer"
+                      },
+                      "product_name": {
+                        "type": "string"
+                      },
+                      "bid_price": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "description": "Example success get all offer",
+                    "value": [
+                      {
+                        "id": 1,
+                        "id_user": 1,
+                        "id_product": 1,
+                        "product_name": "Jam Tangan Casio",
+                        "bid_price": 190000
+                      },
+                      {
+                        "id": 2,
+                        "id_user": 3,
+                        "id_product": 1,
+                        "product_name": "Jam Tangan Casio",
+                        "bid_price": 180000
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [],
+        "tags": [
+          "Offer"
+        ],
+        "summary": "Create New Offer",
+        "description": "Create a offer",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OfferSchemaReqBody"
+              },
+              "examples": {
+                "products": {
+                  "value": {
+                    "id_user": 3,
+                    "id_product": 1,
+                    "bid_price": 180000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succes create new offer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ProductAuth": {
+        "description": "Authentication for Second Hand Management API",
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "parameters": {
+      "id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "Product id for spesific product",
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        }
+      }
+    },
+    "schemas": {
+      "ProductSchemaReqBody": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "id_user": {
+            "type": "integer"
+          },
+          "product_name": {
+            "type": "string"
+          },
+          "product_price": {
+            "type": "integer"
+          },
+          "category": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "OfferSchemaReqBody": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "id_user": {
+            "type": "integer"
+          },
+          "id_product": {
+            "type": "integer"
+          },
+          "bid_price": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}

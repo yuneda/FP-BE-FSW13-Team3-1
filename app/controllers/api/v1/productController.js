@@ -31,7 +31,7 @@ module.exports = {
   },
 
   create(req, res) {
-    // req.body.createdBy = req.user.email;
+    req.body.id_user = req.user.id;
 
     productService
       .create(req.body)

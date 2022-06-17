@@ -47,6 +47,82 @@
     "description": "OpenAPI Guide"
   },
   "paths": {
+    "/register": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create new user",
+        "description": "Create new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success creating new user"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Login user",
+        "description": "Login user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "superadmin": {
+                  "description": "login as superadmin",
+                  "value": {
+                    "email": "admin@gmail.com",
+                    "password": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login Success"
+          }
+        }
+      }
+    },
     "/product": {
       "get": {
         "security": [],
@@ -125,7 +201,11 @@
         }
       },
       "post": {
-        "security": [],
+        "security": [
+          {
+            "ProductAuth": []
+          } 
+        ],
         "tags": [
           "Product"
         ],
@@ -141,7 +221,6 @@
               "examples": {
                 "products": {
                   "value": {
-                    "id_user": 3,
                     "product_name": "Jam Tangan Casio Y",
                     "product_price": 280000,
                     "category": "Aksesoris",
@@ -173,44 +252,13 @@
         }
       }
     },
-    "/register": {
-      "post": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Create new user",
-        "description": "Create new user",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success creating new user"
-          }
-        }
-      }
-    },
     "/offer": {
       "get": {
-        "security": [],
+        "security": [
+          {
+            "ProductAuth": []
+          } 
+        ],
         "tags": [
           "Offer"
         ],
@@ -271,7 +319,11 @@
         }
       },
       "post": {
-        "security": [],
+        "security": [
+          {
+            "ProductAuth": []
+          } 
+        ],
         "tags": [
           "Offer"
         ],
@@ -287,7 +339,6 @@
               "examples": {
                 "products": {
                   "value": {
-                    "id_user": 3,
                     "id_product": 1,
                     "bid_price": 180000
                   }
@@ -345,9 +396,6 @@
           "id": {
             "type": "integer"
           },
-          "id_user": {
-            "type": "integer"
-          },
           "product_name": {
             "type": "string"
           },
@@ -372,9 +420,6 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer"
-          },
-          "id_user": {
             "type": "integer"
           },
           "id_product": {

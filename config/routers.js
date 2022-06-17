@@ -1,5 +1,6 @@
 const express = require("express");
 const controllers = require("../app/controllers");
+const middlewares = require("../app/middlewares");
 const uploadOnMemory = require('../app/middlewares/uploadOnMemory.')
 const upload = require('../app/middlewares/upload')
 const cloudinary = require('../app/middlewares/cloudinary')
@@ -16,14 +17,21 @@ const apiRouter = express.Router();
 // USER ROUTE
 appRouter.post(
   "/api/v1/register",
-  // middlewares.checkCondition.checkCondition,
+  middlewares.checkCondition.checkCondition,
   controllers.api.v1.userController.register
+);
+
+appRouter.post(
+  "/api/v1/login",
+  middlewares.checkValidation.checkData,
+  controllers.api.v1.userController.login
 );
 
 // PRODUCT ROUTE  
 appRouter.post(
   "/api/v1/product",
   // middlewares.checkCondition.checkCondition,
+  middlewares.authorization.authorize,
   controllers.api.v1.productController.create
 );
 
@@ -35,12 +43,27 @@ appRouter.get(
 // OFFER ROUTE
 appRouter.post(
   "/api/v1/offer",
+  middlewares.authorization.authorize,
   controllers.api.v1.offerController.create
 );
 
 appRouter.get(
   "/api/v1/offer",
+  middlewares.authorization.authorize,
   controllers.api.v1.offerController.list
+);
+
+// SALE ROUTE
+appRouter.post(
+  "/api/v1/sale",
+  // middlewares.authorization.authorize,
+  controllers.api.v1.saleController.create
+);
+
+appRouter.get(
+  "/api/v1/sale",
+  // middlewares.authorization.authorize,
+  controllers.api.v1.saleController.list
 );
 
 // Upload Image

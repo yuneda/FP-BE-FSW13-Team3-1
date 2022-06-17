@@ -4,7 +4,8 @@ const { Product } = require("../../../models");
 
 module.exports = {
   create(req, res) {
-    // req.body.createdBy = req.user.email;
+    // res.send(req.user.id_user)
+    req.body.id_user = req.user.id;
     console.log(req.body);
     offerService
       .create(req.body)

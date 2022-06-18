@@ -24,6 +24,10 @@
     {
       "name": "Offer",
       "description": "API for offer in the system"
+    },
+    {
+      "name": "Sale",
+      "description": "API for sale in the system"
     }
   ],
   "servers": [
@@ -123,6 +127,50 @@
         }
       }
     },
+    "/user/{id}": {
+      "put": {
+        "security": [{
+          "ProductAuth": []
+        }],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update Data User",
+        "description": "Update data user",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductSchemaReqBody"
+              },
+              "examples": {
+                "dummy_input": {
+                  "description": "Example Data User",
+                  "value": {
+                    "name": "admin",
+                    "email": "admin@gmail.com",
+                    "password": "123456",
+                    "no_tlpn": "081234567890",
+                    "city": "Surabaya",
+                    "address": "Surabaya",
+                    "image": "image",
+                    "createdAt": "2022-05-10T17:02:45.225Z",
+                    "updatedAt": "2022-05-10T17:02:45.225Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {}
+      }
+    },
     "/product": {
       "get": {
         "security": [],
@@ -204,7 +252,7 @@
         "security": [
           {
             "ProductAuth": []
-          } 
+          }
         ],
         "tags": [
           "Product"
@@ -252,12 +300,57 @@
         }
       }
     },
+    "/product/{id}": {
+      "put": {
+        "security": [
+          {
+            "ProductAuth": []
+          }
+        ],
+        "tags": [
+          "Product"
+        ],
+        "summary": "Update Data Product",
+        "description": "Update data product",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductSchemaReqBody"
+              },
+              "examples": {
+                "dummy_input": {
+                  "description": "Example Data Product",
+                  "value": {
+                    "product_name": "Jam Tangan Casio Y",
+                    "product_price": 280000,
+                    "category": "Aksesoris",
+                    "description": "Putih",
+                    "image": "./images/min.jpg",
+                    "status": "available",
+                    "createdAt": "2022-05-10T17:02:45.225Z",
+                    "updatedAt": "2022-05-10T17:02:45.225Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {}
+      }
+    },
     "/offer": {
       "get": {
         "security": [
           {
             "ProductAuth": []
-          } 
+          }
         ],
         "tags": [
           "Offer"
@@ -322,7 +415,7 @@
         "security": [
           {
             "ProductAuth": []
-          } 
+          }
         ],
         "tags": [
           "Offer"
@@ -350,6 +443,106 @@
         "responses": {
           "200": {
             "description": "Succes create new offer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sale": {
+      "get": {
+        "security": [
+          
+        ],
+        "tags": [
+          "Sale"
+        ],
+        "summary": "Get All Sale",
+        "description": "Get all sale in system",
+        "responses": {
+          "200": {
+            "description": "Success get all sale",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "id_product": {
+                        "type": "integer"
+                      },
+                      "id_offer": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "description": "Example success get all sale",
+                    "value": [
+                      {
+                        "id": 1,
+                        "id_product": 1,
+                        "id_offer": 1
+                      },
+                      {
+                        "id": 2,
+                        "id_product": 2,
+                        "id_offer": 2
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [
+          
+        ],
+        "tags": [
+          "Sale"
+        ],
+        "summary": "Create New Sale",
+        "description": "Create a sale",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaleSchemaReqBody"
+              },
+              "examples": {
+                "products": {
+                  "value": {
+                    "id_product": 1,
+                    "id_offer": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succes create new sale",
             "content": {
               "application/json": {
                 "schema": {
@@ -426,6 +619,20 @@
             "type": "integer"
           },
           "bid_price": {
+            "type": "integer"
+          }
+        }
+      },
+      "SaleSchemaReqBody": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "id_product": {
+            "type": "integer"
+          },
+          "id_offer": {
             "type": "integer"
           }
         }

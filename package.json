@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon bin/www",
+    "start": "node bin/www",
     "develop": "nodemon -q bin/www",
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:create": "sequelize db:create",

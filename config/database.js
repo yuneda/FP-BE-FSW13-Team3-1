@@ -1,7 +1,7 @@
 require('dotenv').config();
 /** Destruct environment variable to get database configuration */
 const {
-  DB_USERNAME = "",
+  DB_USER = "",
   DB_PASSWORD = "",
   DB_HOST = "127.0.0.1",
   DB_NAME = "final_project",

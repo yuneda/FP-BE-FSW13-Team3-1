@@ -67,7 +67,7 @@ module.exports = {
   },
 
   update(req, res) {
-    req.body.updatedBy = req.user.user_email;
+    req.body.id_user = req.user.id;
     productService
       .update(req.params.id, req.body)
       .then(() => {

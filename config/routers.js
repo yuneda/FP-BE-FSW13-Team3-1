@@ -27,6 +27,12 @@ appRouter.post(
   controllers.api.v1.userController.login
 );
 
+appRouter.put(
+  "/api/v1/user/:id",
+  // middlewares.checkValidation.checkData,
+  controllers.api.v1.userController.update
+);
+
 // PRODUCT ROUTE  
 appRouter.post(
   "/api/v1/product",
@@ -38,6 +44,12 @@ appRouter.post(
 appRouter.get(
   "/api/v1/product",
   controllers.api.v1.productController.list
+);
+
+appRouter.put(
+  "/api/v1/product/:id",
+  middlewares.authorization.authorize,
+  controllers.api.v1.productController.update
 );
 
 // OFFER ROUTE

@@ -31,7 +31,7 @@ module.exports = {
   },
 
   create(req, res) {
-    // req.body.createdBy = req.user.email;
+    req.body.id_user = req.user.id;
 
     productService
       .create(req.body)
@@ -67,7 +67,7 @@ module.exports = {
   },
 
   update(req, res) {
-    req.body.updatedBy = req.user.user_email;
+    req.body.id_user = req.user.id;
     productService
       .update(req.params.id, req.body)
       .then(() => {

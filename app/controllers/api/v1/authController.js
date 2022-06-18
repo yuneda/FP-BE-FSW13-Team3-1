@@ -43,49 +43,6 @@ function encryptPassword(password) {
         updatedAt: user.updatedAt,
       });
     },
-
-    // async register(req, res, next) {
-    //     const { user_email, password, role } = req.body
-    //     try {
-    //         if (password.length < 8) {
-    //             res.status(400).json({
-    //                 status: 'failed',
-    //                 message: 'Password must be at least 8 characters'
-    //             })
-    //         }
-
-    //         // const re_email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    //         // if (email !== '' && !email.match(re_email)) {
-    //         //     res.status(400).json({
-    //         //         status: 'failed',
-    //         //         message: "Format email wrongs"
-    //         //     })
-    //         // }
-
-    //         const hashedPassword = await bcrypt.hash(password, SALT);
-    //         const user = await User.create({
-    //             email: user_email.toLowerCase(),
-    //             password: hashedPassword,
-    //             role
-    //         })
-    //         console.log(user)
-    //         res.status(201).json({
-    //             status: "success",
-    //             message: "User successfully registered",
-    //             data: {
-    //                 id: user.id,
-    //                 email: user.email,
-    //                 role
-    //             }
-    //         })
-    //     } catch (err) {
-    //         res.status(400).json({
-    //             status: "failed",
-    //             message: err.message
-    //         })
-    //     }
-    // },
   
     async login(req, res) {
       const email = req.body.email.toLowerCase(); 

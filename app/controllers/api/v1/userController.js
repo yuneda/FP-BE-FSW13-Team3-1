@@ -36,8 +36,8 @@ module.exports = {
 
     const token = jwt.sign({
       id: user.id,
+      name: user.name,
       email: user.email,
-      userName: user.userName,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     }, process.env.JWT_PRIVATE_KEY || 'rahasia', {
@@ -46,8 +46,8 @@ module.exports = {
 
     res.status(201).json({
       id: user.id,
+      name: user.name,
       email: user.email,
-      userName: user.userName,
       token,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
@@ -87,6 +87,23 @@ module.exports = {
         message: err.message,
       });
     });
-  }
+  },
 
+  update(req, res) {
+    // req.body.updatedBy = req.user.user_email;
+    usersService
+      .update(req.params.id, req.body)
+      .then(() => {
+        res.status(200).json({
+          status: "OK",
+          message: "Data berhasil diperbarui",
+        });
+      })
+      .catch((err) => {
+        res.status(422).json({
+          status: "FAIL",
+          message: err.message,
+        });
+      });
+  },
 };

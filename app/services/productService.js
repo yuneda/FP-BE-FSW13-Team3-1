@@ -9,6 +9,10 @@ module.exports = {
     return productRepository.update(id, requestBody);
   },
 
+  updateStatusSold(id, status) {
+    return productRepository.updateStatus(id, status);
+  },
+
   deleted(id, requestBody) {
     return productRepository.deleted(id, requestBody);
   },
@@ -29,6 +33,10 @@ module.exports = {
 
   get(id) {
     return productRepository.find(id);
+  },
+
+  filter(name) {
+    return productRepository.filter(name);
   },
 
   getOne(key) {

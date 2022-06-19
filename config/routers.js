@@ -12,7 +12,7 @@ const appRouter = express.Router();
 const apiRouter = express.Router();
 
 /** Mount GET / handler */
-// appRouter.get("/", controllers.main.index);
+appRouter.get("/", controllers.main.index);
 
 // USER ROUTE
 appRouter.post(
@@ -36,7 +36,6 @@ appRouter.put(
 // PRODUCT ROUTE  
 appRouter.post(
   "/api/v1/product",
-  // middlewares.checkCondition.checkCondition,
   middlewares.authorization.authorize,
   controllers.api.v1.productController.create
 );
@@ -46,10 +45,27 @@ appRouter.get(
   controllers.api.v1.productController.list
 );
 
+appRouter.get(
+  "/api/v1/product/:id",
+  middlewares.authorization.authorize,
+  controllers.api.v1.productController.show
+);
+
+// appRouter.get(
+//   "/api/v1/product/:category",
+//   controllers.api.v1.productController.filter
+// );
+
 appRouter.put(
   "/api/v1/product/:id",
   middlewares.authorization.authorize,
   controllers.api.v1.productController.update
+);
+
+appRouter.put(
+  "/api/v1/product/:id/statussold",
+  middlewares.authorization.authorize,
+  controllers.api.v1.productController.updateStatusSold
 );
 
 // OFFER ROUTE
@@ -76,6 +92,19 @@ appRouter.get(
   "/api/v1/sale",
   // middlewares.authorization.authorize,
   controllers.api.v1.saleController.list
+);
+
+// HISTORY ROUTE
+appRouter.post(
+  "/api/v1/history",
+  middlewares.authorization.authorize,
+  controllers.api.v1.historyController.create
+);
+
+appRouter.get(
+  "/api/v1/history",
+  // middlewares.authorization.authorize,
+  controllers.api.v1.historyController.list
 );
 
 // Upload Image

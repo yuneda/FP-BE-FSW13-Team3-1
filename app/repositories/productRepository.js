@@ -13,6 +13,14 @@ module.exports = {
       });
     },
 
+    updateStatus(id, updateArgs) {
+      return Product.update(updateArgs, {
+        where: {
+          id,
+        },
+      });
+    },
+
     deleted(id, updateArgs) {
       return Product.update(updateArgs, {
         where: {
@@ -30,6 +38,10 @@ module.exports = {
     },
 
     findAll(args) {
+      return Product.findAll(args);
+    },
+
+    filter(args) {
       return Product.findAll(args);
     },
   

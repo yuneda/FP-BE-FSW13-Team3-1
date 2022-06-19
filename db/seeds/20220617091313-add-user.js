@@ -11,10 +11,11 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+    const passwordHash = await require('bcryptjs').hash(process.env.USER_PASSWORD, 10);
     await queryInterface.bulkInsert('Users', [{
       name: 'John Doe',
       email: 'admin@mail.com',
-      password: '123456',
+      password: passwordHash,
       no_tlpn: '081234567890',
       city: 'Jakarta',
       address: 'Jl Sudirman',

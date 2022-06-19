@@ -6,7 +6,7 @@ module.exports = {
   create(req, res) {
     // res.send(req.user.id_user)
     req.body.id_user = req.user.id;
-    console.log(req.body);
+    // console.log(req.body);
     offerService
       .create(req.body)
       .then((offer) => {

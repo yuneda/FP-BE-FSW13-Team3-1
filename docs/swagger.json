@@ -110,7 +110,7 @@
               },
               "examples": {
                 "superadmin": {
-                  "description": "login as superadmin",
+                  "description": "login",
                   "value": {
                     "email": "admin@gmail.com",
                     "password": "password"

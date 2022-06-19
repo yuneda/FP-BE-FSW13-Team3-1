@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 const router = require("../config/routers");
+const cors = require("cors");
 
 // const publicDir = path.join(__dirname, "../public");
 // const viewsDir = path.join(__dirname, "./views");
@@ -19,6 +20,8 @@ app.use(express.json());
 
 /** Set Public Directory */
 // app.use(express.static(publicDir));
+
+app.use(cors())
 
 /** Install Router */
 app.use(router);

@@ -112,8 +112,8 @@
                 "superadmin": {
                   "description": "login",
                   "value": {
-                    "email": "admin@gmail.com",
-                    "password": "password"
+                    "email": "admin1@mail.com",
+                    "password": "123456"
                   }
                 }
               }
@@ -177,8 +177,8 @@
         "tags": [
           "Product"
         ],
-        "summary": "Get All Product",
-        "description": "Get all product in system",
+        "summary": "Get All Product Available",
+        "description": "Get all product available in system",
         "responses": {
           "200": {
             "description": "Success get all products",
@@ -301,6 +301,89 @@
       }
     },
     "/product/{id}": {
+      "get": {
+        "security": [{
+          "ProductAuth": []
+        }],
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get Product by Id",
+        "description": "Get product by id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success get a product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "id_user": {
+                        "type": "integer"
+                      },
+                      "product_name": {
+                        "type": "string"
+                      },
+                      "product_price": {
+                        "type": "integer"
+                      },
+                      "category": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "image": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "description": "Example success get a product",
+                    "value": [
+                      {
+                        "id": 1,
+                        "id_user": 1,
+                        "product_name": "Jam Tangan Casio",
+                        "product_price": 250000,
+                        "category": "Aksesoris",
+                        "description": "Hitam",
+                        "image": "./images/min.jpg",
+                        "status": "available"
+                      },
+                      {
+                        "id": 2,
+                        "id_user": 2,
+                        "product_name": "Jam Tangan Casio X",
+                        "product_price": 280000,
+                        "category": "Aksesoris",
+                        "description": "Putih",
+                        "image": "./images/min.jpg",
+                        "status": "available"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "put": {
         "security": [
           {
@@ -342,6 +425,27 @@
             }
           }
         },
+        "responses": {}
+      }
+    },
+    "/product/{id}/statussold": {
+      "put": {
+        "security": [
+          {
+            "ProductAuth": []
+          }
+        ],
+        "tags": [
+          "Product"
+        ],
+        "summary": "Update Status Product",
+        "description": "Update status product to sold",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/id"
+          }
+        ],
+        
         "responses": {}
       }
     },

@@ -40,11 +40,7 @@ module.exports = {
     findAll(args) {
       return Product.findAll(args);
     },
-
-    filter(args) {
-      return Product.findAll(args);
-    },
-  
+ 
     getTotalProduct(args) {
       return Product.count(args);
     },

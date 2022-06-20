@@ -20,7 +20,7 @@ module.exports = {
   async list(args) {
     try {
       const product = await productRepository.findAll(args);
-      // const productCount = await productRepository.getTotalProducts(args);
+      // const productCount = await productRepository.getTotalProduct(args);
 
       return {
         data: product,
@@ -35,8 +35,8 @@ module.exports = {
     return productRepository.find(id);
   },
 
-  filter(name) {
-    return productRepository.filter(name);
+  filter(category) {
+    return productRepository.filter(category);
   },
 
   getOne(key) {

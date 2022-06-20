@@ -51,17 +51,12 @@ appRouter.get(
   controllers.api.v1.productController.show
 );
 
-// appRouter.get(
-//   "/api/v1/product/:category",
-//   controllers.api.v1.productController.filter
-// );
-
 appRouter.put(
   "/api/v1/product/:id",
   middlewares.authorization.authorize,
   controllers.api.v1.productController.update
 );
-
+// Change status product to sold
 appRouter.put(
   "/api/v1/product/:id/statussold",
   middlewares.authorization.authorize,

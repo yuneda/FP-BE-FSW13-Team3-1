@@ -1,6 +1,13 @@
 const productService = require("../../../services/productService");
 const { User } = require("../../../models");
 
+function filterData(data, userFilter) {
+  const dataFilter = data.data.filter((product) => {
+    return product.category == userFilter;
+  })
+  return dataFilter;
+}
+
 module.exports = {
   create(req, res) {
     req.body.id_user = req.user.id;
@@ -34,12 +41,18 @@ module.exports = {
 
       })
       .then((data, count) => {
+        let result;
+        result = data;
+        if (req.body.filter) {
+          const newData = filterData(data, req.body.filter);
+          result = newData;
+        }
         res.status(200).json({
           status: "OK",
           data: {
-            product: data
+            product: result
           },
-          meta: { total: count },
+          // meta: { total: count },
         });
       })
       .catch((err) => {
@@ -67,22 +80,35 @@ module.exports = {
       });
   },
 
-  // filter(req, res) {
-  //   productService
-  //     .filter(req.params.category)
-  //     .then((post) => {
-  //       res.status(200).json({
-  //         status: "OK",
-  //         data: post,
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       res.status(422).json({
-  //         status: "FAIL",
-  //         message: err.message,
-  //       });
-  //     });
-  // },
+  filter(req, res) {
+    // const choice = {}
+    if (req.params.category === 1) {
+      return category = "Hobi"
+    } else if (req.params.category === 2) {
+      return category = "Kendaraan"
+    } else if (req.params.category === 3) {
+      return category = "Baju"
+    } else if (req.params.category === 4) {
+      return category = "Elektronik"
+    } else if (req.params.category === 5) {
+      return category = "Kesehatan"
+    }
+    // console.log(req.params.category, {category: req.params.category})
+    productService
+      .filter(req.params.category)
+      .then((post) => {
+        res.status(200).json({
+          status: "OK",
+          data: post,
+        });
+      })
+      .catch((err) => {
+        res.status(422).json({
+          status: "FAIL",
+          message: err.message,
+        });
+      });
+  },
 
   update(req, res) {
     req.body.id_user = req.user.id;
@@ -110,7 +136,7 @@ module.exports = {
       .then(() => {
         res.status(200).json({
           status: "OK",
-          message: "Data berhasil diperbarui",
+          message: "Produk Berhasil Terjual",
         });
       })
       .catch((err) => {
@@ -136,7 +162,4 @@ module.exports = {
   //       });
   //     });
   // },
-
-
-
 };

@@ -2,8 +2,6 @@ const express = require("express");
 const controllers = require("../app/controllers");
 const middlewares = require("../app/middlewares");
 const uploadOnMemory = require('../app/middlewares/uploadOnMemory.')
-const upload = require('../app/middlewares/upload')
-const cloudinary = require('../app/middlewares/cloudinary')
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../docs/swagger.json");
@@ -39,6 +37,15 @@ appRouter.put(
   controllers.api.v1.userController.update
 );
 
+// Upload Image Photo User
+appRouter.put(
+  "/api/v1/users/:id/picture/cloudinary",
+  middlewares.authorization.authorize,
+  uploadOnMemory.single("picture"),
+  controllers.api.v1.imageController.upload,
+  controllers.api.v1.userController.update
+);
+
 // PRODUCT ROUTE  
 appRouter.post(
   "/api/v1/product",
@@ -69,6 +76,14 @@ appRouter.put(
   controllers.api.v1.productController.update
 );
 
+// upload file product
+appRouter.put(
+  "/api/v1/product/:id/picture/cloudinary",
+  middlewares.authorization.authorize,
+  uploadOnMemory.single("picture"),
+  controllers.api.v1.imageController.upload,
+  controllers.api.v1.productController.update
+);
 
 // Change status product to sold
 appRouter.put(
@@ -116,34 +131,8 @@ appRouter.get(
   controllers.api.v1.historyController.list
 );
 
-// Upload Image
-appRouter.put(
-  "/api/v1/users/:id/picture/cloudinary",
-  middlewares.authorization.authorize,
-  uploadOnMemory.single("picture"),
-  (req, res, next) => {
-    console.log(req.user)
-    const fileBase64 = req.file.buffer.toString("base64");
-    const file = `data:${req.file.mimetype};base64,${fileBase64}`;
 
-    cloudinary.uploader.upload(file, function (err, result) {
-      if (!!err) {
-        console.log(err);
-        return res.status(400).json({
-          message: "Gagal upload file!",
-        });
-      }
-      req.body.image=result.url
-      next()
 
-      // res.status(201).json({
-      //   message: "Upload image berhasil",
-      //   url: result.url,
-      // });
-    });
-  },controllers.api.v1.userController.update
-
-);
 
 
 // Open API Document

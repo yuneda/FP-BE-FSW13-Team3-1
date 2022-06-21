@@ -27,9 +27,15 @@ appRouter.post(
   controllers.api.v1.userController.login
 );
 
+appRouter.get(
+  "/api/v1/user",
+  middlewares.authorization.authorize,
+  controllers.api.v1.userController.getData
+);
+
 appRouter.put(
   "/api/v1/user/:id",
-  // middlewares.checkValidation.checkData,
+  middlewares.authorization.authorize,
   controllers.api.v1.userController.update
 );
 
@@ -39,10 +45,16 @@ appRouter.post(
   middlewares.authorization.authorize,
   controllers.api.v1.productController.create
 );
-
+// Product with status available or interested
 appRouter.get(
   "/api/v1/product",
   controllers.api.v1.productController.list
+);
+// Product all status from id user for daftar jual page
+appRouter.get(
+  "/api/v1/allproduct",
+  middlewares.authorization.authorize,
+  controllers.api.v1.productController.haveProduct
 );
 
 appRouter.get(
@@ -79,13 +91,13 @@ appRouter.get(
 // SALE ROUTE
 appRouter.post(
   "/api/v1/sale",
-  // middlewares.authorization.authorize,
+  middlewares.authorization.authorize,
   controllers.api.v1.saleController.create
 );
 
 appRouter.get(
   "/api/v1/sale",
-  // middlewares.authorization.authorize,
+  middlewares.authorization.authorize,
   controllers.api.v1.saleController.list
 );
 

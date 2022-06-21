@@ -8,6 +8,13 @@ function filterData(data, userFilter) {
   return dataFilter;
 }
 
+function filterStatus(data, userFilter) {
+  const statusProduct = data.data.filter((product) => {
+    return product.status == userFilter;
+  })
+  return statusProduct;
+}
+
 module.exports = {
   create(req, res) {
     req.body.id_user = req.user.id;
@@ -29,9 +36,10 @@ module.exports = {
   },
 
   list(req, res) {
+    const status = ['available', 'interested']
     productService
       .list({
-        where: { status: 'available' },
+        where: { status: status },
         include: [
           {
             model: User,
@@ -43,8 +51,38 @@ module.exports = {
       .then((data, count) => {
         let result;
         result = data;
+        console.log(req.body.filter)
         if (req.body.filter) {
           const newData = filterData(data, req.body.filter);
+          result = newData;
+        }
+        res.status(200).json({
+          status: "OK",
+          data: {
+            product: result
+          },
+          meta: { total: count },
+        });
+      })
+      .catch((err) => {
+        res.status(400).json({
+          status: "FAIL",
+          message: err.message,
+        });
+      });
+  },
+
+  haveProduct(req, res) {
+    console.log(req.user.id)
+    productService
+      .list({
+        where: { id_user: req.user.id}
+      })
+      .then((data, count) => {
+        let result;
+        result = data;
+        if (req.body.status) {
+          const newData = filterStatus(data, req.body.status);
           result = newData;
         }
         res.status(200).json({

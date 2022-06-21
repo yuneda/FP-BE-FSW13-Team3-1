@@ -54,34 +54,17 @@ module.exports = {
     });
   },
 
-  async whoAmI(req, res) {
-    res.status(200).json(req.user);
-  },
-
-  async intoAdmin(req, res) {
-    /**
-     * superadmin
-     */
-
-    const user = await usersService.get(req.params.id)
-    if (!user) {
-      res.status(404).json({
-        status: "FAIL",
-        message: `User id ${req.params.id} tidak di temukan`,
-      });
-      return;
-    }
-
-    const admin = req.body.isAdmin;
-
-    usersService.update(req.params.id, {
-      isAdmin: admin
-    }).then(() => {
+  async getData(req, res) { 
+    // req.user.id
+    usersService
+    .get(req.user.id)
+    .then((post) => {
       res.status(200).json({
         status: "OK",
-        message: `User adalah admin.`,
+        data: post,
       });
-    }).catch((err) => {
+    })
+    .catch((err) => {
       res.status(422).json({
         status: "FAIL",
         message: err.message,
@@ -89,8 +72,42 @@ module.exports = {
     });
   },
 
+  // async whoAmI(req, res) {
+  //   res.status(200).json(req.user);
+  // },
+
+  // async intoAdmin(req, res) {
+  //   /**
+  //    * superadmin
+  //    */
+
+  //   const user = await usersService.get(req.params.id)
+  //   if (!user) {
+  //     res.status(404).json({
+  //       status: "FAIL",
+  //       message: `User id ${req.params.id} tidak di temukan`,
+  //     });
+  //     return;
+  //   }
+
+  //   const admin = req.body.isAdmin;
+
+  //   usersService.update(req.params.id, {
+  //     isAdmin: admin
+  //   }).then(() => {
+  //     res.status(200).json({
+  //       status: "OK",
+  //       message: `User adalah admin.`,
+  //     });
+  //   }).catch((err) => {
+  //     res.status(422).json({
+  //       status: "FAIL",
+  //       message: err.message,
+  //     });
+  //   });
+  // },
+
   update(req, res) {
-    // req.body.updatedBy = req.user.user_email;
     usersService
       .update(req.params.id, req.body)
       .then(() => {

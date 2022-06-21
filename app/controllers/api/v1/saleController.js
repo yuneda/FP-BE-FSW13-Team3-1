@@ -35,7 +35,7 @@ module.exports = {
   },
 
   create(req, res) {
-    // req.body.id_user = req.user.id;
+    req.body.id_user = req.user.id;
 
     saleService
       .create(req.body)

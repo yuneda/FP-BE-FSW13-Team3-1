@@ -127,11 +127,83 @@
         }
       }
     },
+    "/user": {
+      "get": {
+        "security": [
+          {
+            "ProductAuth": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get Data User",
+        "description": "Get data user login",
+        "responses": {
+          "200": {
+            "description": "Success get data user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "no_tlpn": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "address": {
+                        "type": "string"
+                      },
+                      "image": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "description": "Example success get data user",
+                    "value": [
+                      {
+                        "id": 1,
+                        "name": "admin",
+                        "email": "admin@gmail.com",
+                        "no_tlpn": "081234567890",
+                        "city": "Surabaya",
+                        "address": "Surabaya",
+                        "image": "image",
+                        "createdAt": "2022-05-10T17:02:45.225Z",
+                        "updatedAt": "2022-05-10T17:02:45.225Z"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/user/{id}": {
       "put": {
-        "security": [{
-          "ProductAuth": []
-        }],
+        "security": [
+          {
+            "ProductAuth": []
+          }
+        ],
         "tags": [
           "Users"
         ],
@@ -154,8 +226,7 @@
                   "description": "Example Data User",
                   "value": {
                     "name": "admin",
-                    "email": "admin@gmail.com",
-                    "password": "123456",
+                    "email": "admin@mail.com",
                     "no_tlpn": "081234567890",
                     "city": "Surabaya",
                     "address": "Surabaya",
@@ -302,9 +373,11 @@
     },
     "/product/{id}": {
       "get": {
-        "security": [{
-          "ProductAuth": []
-        }],
+        "security": [
+          {
+            "ProductAuth": []
+          }
+        ],
         "tags": [
           "Product"
         ],
@@ -445,7 +518,6 @@
             "$ref": "#/components/parameters/id"
           }
         ],
-        
         "responses": {}
       }
     },
@@ -565,9 +637,7 @@
     },
     "/sale": {
       "get": {
-        "security": [
-          
-        ],
+        "security": [],
         "tags": [
           "Sale"
         ],
@@ -618,9 +688,7 @@
         }
       },
       "post": {
-        "security": [
-          
-        ],
+        "security": [],
         "tags": [
           "Sale"
         ],

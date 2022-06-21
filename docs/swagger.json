@@ -242,6 +242,45 @@
         "responses": {}
       }
     },
+    "/user/{id}/picture/cloudinary": {
+      "put": {
+        "security": [
+          {
+            "ProductAuth": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update Data User With Upload Image",
+        "description": "Update data user with upload image",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fileName": {
+                    "type": "string",
+                    "format": "base64"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {}
+    },
     "/product": {
       "get": {
         "security": [],

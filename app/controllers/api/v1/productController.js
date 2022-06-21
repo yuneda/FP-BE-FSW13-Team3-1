@@ -184,20 +184,4 @@ module.exports = {
         });
       });
   },
-
-  // deleted(req, res) {
-  //   productService
-  //     .deleted(req.params.id, { isDeleted: true, deletedBy: req.user.user_email })
-  //     .then(() => {
-  //       res.status(200).json({
-  //         deletedBy: req.user.user_email,
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       res.status(422).json({
-  //         status: "FAIL",
-  //         message: err.message,
-  //       });
-  //     });
-  // },
 };

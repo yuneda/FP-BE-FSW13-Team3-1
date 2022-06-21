@@ -3,7 +3,6 @@ const cloudinary = require('../../../middlewares/cloudinary')
 
 module.exports = {
   upload(req, res, next) {
-    // console.log(req.user)
     const fileBase64 = req.file.buffer.toString("base64");
     const file = `data:${req.file.mimetype};base64,${fileBase64}`;
 

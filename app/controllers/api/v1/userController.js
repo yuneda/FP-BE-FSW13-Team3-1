@@ -92,7 +92,7 @@ module.exports = {
   update(req, res) {
     // req.body.updatedBy = req.user.user_email;
     usersService
-      .update(req.params.id, req.body)
+      .update(req.user.id, req.body)
       .then(() => {
         res.status(200).json({
           status: "OK",

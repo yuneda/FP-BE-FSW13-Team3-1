@@ -109,7 +109,7 @@ module.exports = {
 
   update(req, res) {
     usersService
-      .update(req.params.id, req.body)
+      .update(req.user.id, req.body)
       .then(() => {
         res.status(200).json({
           status: "OK",

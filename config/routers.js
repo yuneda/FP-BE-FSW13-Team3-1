@@ -35,7 +35,7 @@ appRouter.get(
 
 appRouter.put(
   "/api/v1/user/:id",
-  middlewares.authorization.authorize,
+  middlewares.checkValidation.checkData,
   controllers.api.v1.userController.update
 );
 
@@ -68,6 +68,8 @@ appRouter.put(
   middlewares.authorization.authorize,
   controllers.api.v1.productController.update
 );
+
+
 // Change status product to sold
 appRouter.put(
   "/api/v1/product/:id/statussold",
@@ -117,8 +119,10 @@ appRouter.get(
 // Upload Image
 appRouter.put(
   "/api/v1/users/:id/picture/cloudinary",
+  middlewares.authorization.authorize,
   uploadOnMemory.single("picture"),
-  (req, res) => {
+  (req, res, next) => {
+    console.log(req.user)
     const fileBase64 = req.file.buffer.toString("base64");
     const file = `data:${req.file.mimetype};base64,${fileBase64}`;
 
@@ -129,13 +133,16 @@ appRouter.put(
           message: "Gagal upload file!",
         });
       }
+      req.body.image=result.url
+      next()
 
-      res.status(201).json({
-        message: "Upload image berhasil",
-        url: result.url,
-      });
+      // res.status(201).json({
+      //   message: "Upload image berhasil",
+      //   url: result.url,
+      // });
     });
-  }
+  },controllers.api.v1.userController.update
+
 );
 
 

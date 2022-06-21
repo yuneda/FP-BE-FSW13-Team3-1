@@ -1,4 +1,4 @@
-name: Deploy_FE_FP
+name: Deploy_BE_FP
 
 on:
   push:

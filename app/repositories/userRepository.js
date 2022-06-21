@@ -13,25 +13,11 @@ module.exports = {
     });
   },
 
-  // delete(id) {
-  //   return User.destroy(id);
-  // },
-
   find(id) {
     return User.findByPk(id);
   },
 
-  // findAll() {
-  //   return User.findAll();
-  // },
-
-  // getTotalUser() {
-  //   return User.count();
-  // },
-
-
   findOne(key) {
     return User.findOne(key);
   },
-
 };

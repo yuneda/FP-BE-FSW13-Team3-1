@@ -412,11 +412,7 @@
     },
     "/product/{id}": {
       "get": {
-        "security": [
-          {
-            "ProductAuth": []
-          }
-        ],
+        "security": [],
         "tags": [
           "Product"
         ],

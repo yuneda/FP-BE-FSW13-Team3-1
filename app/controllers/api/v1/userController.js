@@ -43,7 +43,7 @@ module.exports = {
       expiresIn: '1h'
     });
 
-    res.status(201).json({
+    res.status(200).json({
       id: user.id,
       name: user.name,
       email: user.email,

@@ -103,11 +103,19 @@ module.exports = {
 
   show(req, res) {
     productService
-      .get(req.params.id)
-      .then((post) => {
+      .getOne({
+        where: { id: req.params.id},
+        include: [
+          {
+            model: User,
+            attributes: ["name", "city"],
+          },
+        ],
+      })
+      .then((user) => {
         res.status(200).json({
           status: "OK",
-          data: post,
+          data: user,
         });
       })
       .catch((err) => {

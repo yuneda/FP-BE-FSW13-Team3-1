@@ -66,7 +66,6 @@ appRouter.get(
 
 appRouter.get(
   "/api/v1/product/:id",
-  middlewares.authorization.authorize,
   controllers.api.v1.productController.show
 );
 

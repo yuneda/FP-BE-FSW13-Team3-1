@@ -73,10 +73,9 @@ module.exports = {
   },
 
   haveProduct(req, res) {
-    console.log(req.user.id)
     productService
       .list({
-        where: { id_user: req.user.id}
+        where: { id_user: req.user.id }
       })
       .then((data, count) => {
         let result;
@@ -85,13 +84,22 @@ module.exports = {
           const newData = filterStatus(data, req.body.status);
           result = newData;
         }
-        res.status(200).json({
-          status: "OK",
-          data: {
-            product: result
-          },
-          // meta: { total: count },
-        });
+
+        if (result == '') {
+          res.status(404).json({
+            status: "FAIL",
+            message: "doesn't have product",
+          });
+        } else {
+          res.status(200).json({
+            status: "OK",
+            data: {
+              product: result
+            },
+            // meta: { total: count },
+
+          });
+        }
       })
       .catch((err) => {
         res.status(400).json({
@@ -104,7 +112,7 @@ module.exports = {
   show(req, res) {
     productService
       .getOne({
-        where: { id: req.params.id},
+        where: { id: req.params.id },
         include: [
           {
             model: User,
@@ -126,36 +134,6 @@ module.exports = {
       });
   },
 
-  filter(req, res) {
-    // const choice = {}
-    if (req.params.category === 1) {
-      return category = "Hobi"
-    } else if (req.params.category === 2) {
-      return category = "Kendaraan"
-    } else if (req.params.category === 3) {
-      return category = "Baju"
-    } else if (req.params.category === 4) {
-      return category = "Elektronik"
-    } else if (req.params.category === 5) {
-      return category = "Kesehatan"
-    }
-    // console.log(req.params.category, {category: req.params.category})
-    productService
-      .filter(req.params.category)
-      .then((post) => {
-        res.status(200).json({
-          status: "OK",
-          data: post,
-        });
-      })
-      .catch((err) => {
-        res.status(422).json({
-          status: "FAIL",
-          message: err.message,
-        });
-      });
-  },
-
   update(req, res) {
     req.body.id_user = req.user.id;
     productService
@@ -163,7 +141,7 @@ module.exports = {
       .then(() => {
         res.status(200).json({
           status: "OK",
-          message: "Data berhasil diperbarui",
+          message: "Data Updated Successfully",
         });
       })
       .catch((err) => {
@@ -182,7 +160,7 @@ module.exports = {
       .then(() => {
         res.status(200).json({
           status: "OK",
-          message: "Produk Berhasil Terjual",
+          message: "Product Sold Successfully",
         });
       })
       .catch((err) => {

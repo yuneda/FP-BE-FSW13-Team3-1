@@ -1,5 +1,6 @@
 const usersService = require("../services/userService")
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const { EmailNotFoundError, WrongPasswordError } = require("../errors");
 
 module.exports = {
   async checkData(req, res, next) {
@@ -11,19 +12,16 @@ module.exports = {
     })
 
     if (!user) {
-      res.status(404).json({
-        status: "FAIL",
-        message: `Email not found!`,
-      });
+      const err = new EmailNotFoundError();
+      res.status(404).json(err)         
       return;
     }
 
     const comparePassword = await bcrypt.compareSync(password, user.password)
 
     if (!comparePassword) {
-      res.status(401).json({
-        message: 'Wrong Password. Please Try Again!'
-      });
+      const err = new WrongPasswordError();
+      res.status(401).json(err)
       return;
     }
     req.user = user;

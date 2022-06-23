@@ -88,7 +88,7 @@ module.exports = {
         if (result == '') {
           res.status(404).json({
             status: "FAIL",
-            message: "doesn't have product",
+            message: "Doesn't have product",
           });
         } else {
           res.status(200).json({

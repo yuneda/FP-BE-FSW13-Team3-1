@@ -76,7 +76,7 @@ module.exports = {
       .then(() => {
         res.status(200).json({
           status: "OK",
-          message: "Data berhasil diperbarui",
+          message: "Data success updated!!",
         });
       })
       .catch((err) => {

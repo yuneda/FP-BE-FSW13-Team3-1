@@ -3,6 +3,7 @@ const WrongEmailFormatError = require('./WrongEmailFormatError');
 const EmailAlreadyTakenError = require('./EmailAlreadyTakenError');
 const EmailNotFoundError = require('./EmailNotFoundError');
 const WrongPasswordError = require('./WrongPasswordError');
+const FailedUploadFileError = require('./FailedUploadFileError');
 
 module.exports = {
   LengthPasswordError,
@@ -10,4 +11,5 @@ module.exports = {
   EmailAlreadyTakenError,
   EmailNotFoundError,
   WrongPasswordError,
+  FailedUploadFileError,
 };

@@ -4,7 +4,6 @@ const controllers = require("../app/controllers");
 const middlewares = require("../app/middlewares");
 const uploadOnMemory = require('../app/middlewares/uploadOnMemory.')
 const upload = require('../app/middlewares/upload')
-const cloudinary2 = require("../app/middlewares/cloudinary2")
 const { multerUploads } = require("../app/middlewares/multerUpload");
 
 const swaggerUi = require("swagger-ui-express");

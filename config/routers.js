@@ -1,7 +1,11 @@
 const express = require("express");
+require('dotenv').config();
 const controllers = require("../app/controllers");
 const middlewares = require("../app/middlewares");
 const uploadOnMemory = require('../app/middlewares/uploadOnMemory.')
+const upload = require('../app/middlewares/upload')
+const cloudinary2 = require("../app/middlewares/cloudinary2")
+const { multerUploads } = require("../app/middlewares/multerUpload");
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../docs/swagger.json");
@@ -50,6 +54,8 @@ appRouter.put(
 appRouter.post(
   "/api/v1/product",
   middlewares.authorization.authorize,
+  multerUploads,
+  controllers.api.v1.imageController.multerUploads,
   controllers.api.v1.productController.create
 );
 // Product with status available or interested
@@ -77,10 +83,10 @@ appRouter.put(
 
 // upload file product
 appRouter.put(
-  "/api/v1/product/:id/picture/cloudinary",
+  "/api/v1/product/:id/picture/cloudinaryy",
   middlewares.authorization.authorize,
-  uploadOnMemory.single("picture"),
-  controllers.api.v1.imageController.upload,
+  multerUploads,
+  controllers.api.v1.imageController.multerUploads,
   controllers.api.v1.productController.update
 );
 

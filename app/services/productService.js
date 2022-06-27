@@ -13,10 +13,6 @@ module.exports = {
     return productRepository.updateStatus(id, status);
   },
 
-  deleted(id, requestBody) {
-    return productRepository.deleted(id, requestBody);
-  },
-
   async list(args) {
     try {
       const product = await productRepository.findAll(args);

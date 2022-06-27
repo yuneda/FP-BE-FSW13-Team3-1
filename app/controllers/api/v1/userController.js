@@ -40,7 +40,7 @@ module.exports = {
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     }, process.env.JWT_PRIVATE_KEY || 'rahasia', {
-      expiresIn: '1h'
+      expiresIn: '24h'
     });
 
     res.status(200).json({

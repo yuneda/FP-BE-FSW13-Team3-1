@@ -52,6 +52,20 @@ appRouter.post(
   middlewares.authorization.authorize,
   controllers.api.v1.productController.create
 );
+
+// SEARCH API QUERY
+appRouter.post(
+  "/api/v1/product/search",
+  // middlewares.authorization.authorize,
+  controllers.api.v1.productController.search
+);
+
+appRouter.put(
+  "/api/v1/product",
+  middlewares.authorization.authorize,
+  controllers.api.v1.productController.create
+);
+
 // Product with status available or interested
 appRouter.get(
   "/api/v1/product",

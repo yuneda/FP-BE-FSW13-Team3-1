@@ -1,5 +1,10 @@
 const productService = require("../../../services/productService");
 const { User } = require("../../../models");
+const { query } = require("express");
+
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 
 function filterData(data, userFilter) {
   const dataFilter = data.data.filter((product) => {
@@ -40,6 +45,47 @@ module.exports = {
     productService
       .list({
         where: { status: status },
+        include: [
+          {
+            model: User,
+            attributes: ["name", "city"],
+          },
+        ],
+
+      })
+      .then((data, count) => {
+        let result;
+        result = data;
+        console.log(req.body.filter)
+        if (req.body.filter) {
+          const newData = filterData(data, req.body.filter);
+          result = newData;
+        }
+        res.status(200).json({
+          status: "OK",
+          data: {
+            product: result
+          },
+          meta: { total: count },
+        });
+      })
+      .catch((err) => {
+        res.status(400).json({
+          status: "FAIL",
+          message: err.message,
+        });
+      });
+  },
+
+  search(req, res) {
+    console.log(req.query)
+    const status = ['available', 'interested']
+    productService
+      .list({
+        where: { status: status, 
+          product_name:{[Op.iLike]: `%${req.query.name}%`}
+          // product_name: sequelize.where(sequelize.fn('LOWER', sequelize.col('product_name')), 'LIKE', '%' + req.query.name + '%')
+        },
         include: [
           {
             model: User,
@@ -151,6 +197,7 @@ module.exports = {
         });
       });
   },
+  
 
   updateStatusSold(req, res) {
     req.body.id_user = req.user.id;

@@ -8,13 +8,13 @@ module.exports = {
   update(id, requestBody) {
     return userRepository.update(id, requestBody);
   },
-  
+
   get(id) {
-      return userRepository.find(id);
+    return userRepository.find(id);
   },
 
   getOne(key) {
-      return userRepository.findOne(key);
+    return userRepository.findOne(key);
   },
 
 };

@@ -1,48 +1,40 @@
 const { Product } = require("../models")
 
 module.exports = {
-    create(createArgs) {
-      return Product.create(createArgs);
-    },
-  
-    update(id, updateArgs) {
-      return Product.update(updateArgs, {
-        where: {
-          id,
-        },
-      });
-    },
+  create(createArgs) {
+    return Product.create(createArgs);
+  },
 
-    updateStatus(id, updateArgs) {
-      return Product.update(updateArgs, {
-        where: {
-          id,
-        },
-      });
-    },
+  update(id, updateArgs) {
+    return Product.update(updateArgs, {
+      where: {
+        id,
+      },
+    });
+  },
 
-    deleted(id, updateArgs) {
-      return Product.update(updateArgs, {
-        where: {
-          id,
-        },
-      });
-    },
-  
-    find(id) {
-      return Product.findByPk(id);
-    },
-  
-    findOne(key) {
-      return Product.findOne(key);
-    },
+  updateStatus(id, updateArgs) {
+    return Product.update(updateArgs, {
+      where: {
+        id,
+      },
+    });
+  },
 
-    findAll(args) {
-      return Product.findAll(args);
-    },
- 
-    getTotalProduct(args) {
-      return Product.count(args);
-    },
-  };
-  
+
+  find(id) {
+    return Product.findByPk(id);
+  },
+
+  findOne(key) {
+    return Product.findOne(key);
+  },
+
+  findAll(args) {
+    return Product.findAll(args);
+  },
+
+  getTotalProduct(args) {
+    return Product.count(args);
+  },
+};

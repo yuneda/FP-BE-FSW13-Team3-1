@@ -42,6 +42,8 @@ app.use(function (req, res, next) {
 
 // app.use(cors());
 // app.options('*', cors());
+app.use(cors({origin: '*'}));
+
 
 /** Install Router */
 app.use(router);

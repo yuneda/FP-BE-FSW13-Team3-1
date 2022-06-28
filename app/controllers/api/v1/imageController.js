@@ -1,4 +1,3 @@
-const cloudinary = require('../../../middlewares/cloudinary')
 const { FailedUploadFileError } = require("../../../errors");
 
 const { dataUri } = require("../../../middlewares/multerUpload");
@@ -6,9 +5,10 @@ const { uploader, cloudinaryConfig } = require("../../../middlewares/cloudinary"
 
 module.exports = {
   upload(req, res, next) {
+    console.log('masuk')
     const fileBase64 = req.file.buffer.toString("base64");
     const file = `data:${req.file.mimetype};base64,${fileBase64}`;
-    console.log(req.file)
+    cloudinaryConfig();
 
     if (!req.file.mimetype.includes("image")) {
       return res.status(400).json({
@@ -16,13 +16,17 @@ module.exports = {
       });
     }
 
-    cloudinary.uploader.upload(file, function (err, result) {
+    uploader.upload(file, function (err, result) {
+      console.log('masu2k')
       if (!!err) {
+        console.log('masu2k')
         console.log(err);
-        const eerr = new FailedUploadFileError();
-        return res.status(400).json(eerr);
+        const error = new FailedUploadFileError();
+        return res.status(400).json(error);
       }
+      console.log(result)
       req.body.image = result.url
+      console.log(req.body.image)
       next()
 
       // res.status(201).json({

@@ -35,14 +35,14 @@ appRouter.get(
 );
 
 appRouter.put(
-  "/api/v1/user/:id",
+  "/api/v1/user",
   middlewares.authorization.authorize,
   controllers.api.v1.userController.update
 );
 
 // Upload Image Photo User
 appRouter.put(
-  "/api/v1/users/:id/picture/cloudinary",
+  "/api/v1/user/:id/picture/cloudinary",
   middlewares.authorization.authorize,
   uploadOnMemory.single("picture"),
   controllers.api.v1.imageController.upload,
@@ -96,7 +96,7 @@ appRouter.put(
 
 // upload file product
 appRouter.put(
-  "/api/v1/product/:id/picture/cloudinaryy",
+  "/api/v1/product/:id/picture/cloudinary",
   middlewares.authorization.authorize,
   multerUploads,
   controllers.api.v1.imageController.multerUploads,

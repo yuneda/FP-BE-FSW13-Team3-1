@@ -36,7 +36,7 @@ appRouter.get(
 
 appRouter.put(
   "/api/v1/user/:id",
-  middlewares.checkValidation.checkData,
+  middlewares.authorization.authorize,
   controllers.api.v1.userController.update
 );
 

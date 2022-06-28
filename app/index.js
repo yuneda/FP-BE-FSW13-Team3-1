@@ -21,7 +21,8 @@ app.use(express.json());
 /** Set Public Directory */
 // app.use(express.static(publicDir));
 
-app.use(cors())
+app.use(cors());
+app.options('*', cors());
 
 /** Install Router */
 app.use(router);

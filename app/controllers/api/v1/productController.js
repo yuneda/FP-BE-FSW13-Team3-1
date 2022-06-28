@@ -121,7 +121,13 @@ module.exports = {
   haveProduct(req, res) {
     productService
       .list({
-        where: { id_user: req.user.id }
+        where: { id_user: req.user.id },
+        include: [
+          {
+            model: User,
+            attributes: ["name", "city"],
+          },
+        ],
       })
       .then((data, count) => {
         let result;

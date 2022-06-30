@@ -1,9 +1,9 @@
 const express = require("express");
-require('dotenv').config();
+require("dotenv").config();
 const controllers = require("../app/controllers");
 const middlewares = require("../app/middlewares");
-const uploadOnMemory = require('../app/middlewares/uploadOnMemory.')
-const upload = require('../app/middlewares/upload')
+const uploadOnMemory = require("../app/middlewares/uploadOnMemory.");
+const upload = require("../app/middlewares/upload");
 const { multerUploads } = require("../app/middlewares/multerUpload");
 
 const swaggerUi = require("swagger-ui-express");
@@ -49,7 +49,7 @@ appRouter.put(
   controllers.api.v1.userController.update
 );
 
-// PRODUCT ROUTE  
+// PRODUCT ROUTE
 appRouter.post(
   "/api/v1/product",
   middlewares.authorization.authorize,
@@ -73,10 +73,7 @@ appRouter.put(
 );
 
 // Product with status available or interested
-appRouter.get(
-  "/api/v1/product",
-  controllers.api.v1.productController.list
-);
+appRouter.get("/api/v1/product", controllers.api.v1.productController.list);
 // Product all status from id user for daftar jual page
 appRouter.get(
   "/api/v1/allproduct",
@@ -84,10 +81,7 @@ appRouter.get(
   controllers.api.v1.productController.haveProduct
 );
 
-appRouter.get(
-  "/api/v1/product/:id",
-  controllers.api.v1.productController.show
-);
+appRouter.get("/api/v1/product/:id", controllers.api.v1.productController.show);
 
 appRouter.put(
   "/api/v1/product/:id",
@@ -158,8 +152,12 @@ appRouter.get(
   controllers.api.v1.historyController.show
 );
 
-
-
+// notification
+appRouter.get(
+  "/api/v1/notif",
+  middlewares.authorization.authorize,
+  controllers.api.v1.historyController.haveNotif
+);
 
 // Open API Document
 apiRouter.use("/api-docs", swaggerUi.serve);
@@ -197,4 +195,3 @@ appRouter.use(controllers.main.onLost);
 appRouter.use(controllers.main.onError);
 
 module.exports = appRouter;
-

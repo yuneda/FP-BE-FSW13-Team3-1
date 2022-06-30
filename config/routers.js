@@ -73,7 +73,11 @@ appRouter.put(
 );
 
 // Product with status available or interested
-appRouter.get("/api/v1/product", controllers.api.v1.productController.list);
+appRouter.get(
+  "/api/v1/product",
+  controllers.api.v1.productController.list
+);
+
 // Product all status from id user for daftar jual page
 appRouter.get(
   "/api/v1/allproduct",

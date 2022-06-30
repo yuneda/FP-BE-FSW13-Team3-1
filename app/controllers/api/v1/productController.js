@@ -62,7 +62,7 @@ module.exports = {
         let result;
         result = data;
         console.log(req.query)
-        if (req.query.filter) {
+        if (req.query.filter && req.query.filter !== "Semua") {
           const newData = filterData(data, req.query.filter);
           result = newData;
         }

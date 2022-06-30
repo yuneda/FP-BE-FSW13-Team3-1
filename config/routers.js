@@ -55,7 +55,8 @@ appRouter.post(
   middlewares.authorization.authorize,
   multerUploads,
   controllers.api.v1.imageController.multerUploads,
-  controllers.api.v1.productController.create
+  controllers.api.v1.productController.create,
+  controllers.api.v1.historyController.create
 );
 
 // SEARCH API QUERY
@@ -114,7 +115,8 @@ appRouter.put(
 appRouter.post(
   "/api/v1/offer",
   middlewares.authorization.authorize,
-  controllers.api.v1.offerController.create
+  controllers.api.v1.offerController.create,
+  controllers.api.v1.historyController.create
 );
 
 appRouter.get(
@@ -140,7 +142,7 @@ appRouter.get(
 appRouter.post(
   "/api/v1/history",
   middlewares.authorization.authorize,
-  controllers.api.v1.historyController.create
+  controllers.api.v1.historyController.createAccOffer
 );
 
 appRouter.get(
@@ -149,6 +151,12 @@ appRouter.get(
   controllers.api.v1.historyController.list
 );
 
+// history by id
+appRouter.get(
+  "/api/v1/history/:id",
+  // middlewares.authorization.authorize,
+  controllers.api.v1.historyController.show
+);
 
 
 

@@ -3,18 +3,26 @@ const { User } = require("../../../models");
 const { Product } = require("../../../models");
 
 module.exports = {
-  create(req, res) {
+  create(req, res, next) {
     // res.send(req.user.id_user)
     req.body.id_user = req.user.id;
-    // console.log(req.body);
+    console.log(req.url);
     offerService
-      .create(req.body)
+      .create(req.body, {
+        include: [{
+          model: User,
+          as: 'name_user'
+        }]
+      })
       .then((offer) => {
-        console.log(offer)
-        res.status(201).json({
-          status: "OK",
-          data: offer,
-        });
+        // console.log(offer)
+        // res.status(201).json({
+        //   status: "OK",
+        //   data: offer,
+        // });
+        req.body.offer = offer;
+        console.log(req.body.offer)
+        next();
       })
       .catch((err) => {
         res.status(401).json({
@@ -30,7 +38,7 @@ module.exports = {
         include: [
           {
             model: User,
-            attributes: ["name", "email"],
+            attributes: ["name", "city"],
           },
           {
             model: Product,

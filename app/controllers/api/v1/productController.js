@@ -21,16 +21,20 @@ function filterStatus(data, userFilter) {
 }
 
 module.exports = {
-  create(req, res) {
+  create(req, res, next) {
     req.body.id_user = req.user.id;
 
     productService
       .create(req.body)
       .then((product) => {
-        res.status(201).json({
-          status: "OK",
-          data: product,
-        });
+        req.body.product = product;
+        // console.log(req.body.product.product_name)
+        // res.status(201).json({
+        //   status: "OK",
+        //   data: product,
+        // });
+        
+        next();
       })
       .catch((err) => {
         res.status(401).json({
@@ -38,6 +42,7 @@ module.exports = {
           message: err.message,
         });
       });
+
   },
 
   list(req, res) {

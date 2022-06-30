@@ -3,7 +3,7 @@ const multer = require("multer");
 const datauri = require('datauri');
 
 const storage = multer.memoryStorage();
-const multerUploads = multer({ storage }).array("files");
+const multerUploads = multer({ storage }).any("files");
 
 const dUri = new datauri();
 

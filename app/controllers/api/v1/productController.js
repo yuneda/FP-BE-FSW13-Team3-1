@@ -10,7 +10,7 @@ function filterData(data, userFilter) {
   const dataFilter = data.data.filter((product) => {
     return product.category == userFilter;
   })
-  return dataFilter;
+  return {data: dataFilter};
 }
 
 function filterStatus(data, userFilter) {

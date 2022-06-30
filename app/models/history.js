@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id_offer',
       })
       History.belongsTo(models.User, {
-        foreignKey: 'id',
+        foreignKey: 'id_seller',
+      })
+      History.belongsTo(models.User, {
+        foreignKey: 'id_buyer',
       })
     }
   }
@@ -26,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     id_product: DataTypes.INTEGER,
     id_offer: DataTypes.INTEGER,
     id_buyer: DataTypes.INTEGER,
-    seller_name: DataTypes.STRING,
+    id_seller: DataTypes.INTEGER,
     status: DataTypes.STRING
   }, {
     sequelize,

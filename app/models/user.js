@@ -20,9 +20,9 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.History, {
         foreignKey: 'id_buyer',
       })
-      // User.hasMany(models.History, {
-      //   foreignKey: 'id_seller',
-      // })
+      User.hasMany(models.History, {
+        foreignKey: 'id_seller',
+      })
     }
   }
   User.init({

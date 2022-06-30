@@ -17,8 +17,8 @@ module.exports = {
       id_buyer: {
         type: Sequelize.INTEGER
       },
-      seller_name: {
-        type: Sequelize.STRING
+      id_seller: {
+        type: Sequelize.INTEGER
       },
       status: {
         type: Sequelize.STRING

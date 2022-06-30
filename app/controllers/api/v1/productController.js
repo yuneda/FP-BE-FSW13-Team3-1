@@ -61,8 +61,9 @@ module.exports = {
       .then((data, count) => {
         let result;
         result = data;
-        if (req.params.filter) {
-          const newData = filterData(data, req.params.filter);
+        console.log(req.query)
+        if (req.query.filter) {
+          const newData = filterData(data, req.query.filter);
           result = newData;
         }
         res.status(200).json({

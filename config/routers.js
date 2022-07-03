@@ -79,7 +79,7 @@ appRouter.get(
 );
 
 // Product all status from id user for daftar jual page
-appRouter.get(
+appRouter.post(
   "/api/v1/allproduct",
   middlewares.authorization.authorize,
   controllers.api.v1.productController.haveProduct

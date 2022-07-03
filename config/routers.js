@@ -123,6 +123,12 @@ appRouter.get(
   controllers.api.v1.offerController.list
 );
 
+appRouter.get(
+  "/api/v1/offer/:id",
+  middlewares.authorization.authorize,
+  controllers.api.v1.offerController.show
+);
+
 // SALE ROUTE
 appRouter.post(
   "/api/v1/sale",

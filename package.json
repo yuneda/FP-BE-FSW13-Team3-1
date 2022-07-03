@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node bin/www",
     "develop": "nodemon -q bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "db:create": "sequelize db:create",
     "db:drop": "sequelize db:drop",
     "db:migrate": "sequelize db:migrate",
@@ -27,10 +27,11 @@
     "pg": "^8.7.3",
     "sequelize": "^6.20.1",
     "sequelize-cli": "^6.4.1",
-    "supertest": "^6.2.4",
     "swagger-ui-express": "^4.4.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "jest": "^28.1.2",
+    "nodemon": "^2.0.16",
+    "supertest": "^6.2.4"
   }
 }

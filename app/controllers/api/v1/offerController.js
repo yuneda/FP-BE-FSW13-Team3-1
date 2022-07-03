@@ -38,11 +38,11 @@ module.exports = {
         include: [
           {
             model: User,
-            attributes: ["name", "city"],
+            include: { all: true },
           },
           {
             model: Product,
-            attributes: ["product_name", "product_price"],
+            include: { all: true },
           },
         ],
       })
@@ -70,11 +70,11 @@ module.exports = {
         include: [
           {
             model: User,
-            attributes: ["name", "city"],
+            include: { all: true },
           },
           {
             model: Product,
-            attributes: ["product_name", "product_price"],
+            include: { all: true },
           },
         ],
       })

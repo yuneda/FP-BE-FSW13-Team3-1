@@ -25,10 +25,11 @@ describe('Login', () => {
   // });
 
   it('Login success, status code 201', async () => request(app)
-    .post('/v1/api/login')
+    .post('/api/v1/login')
     .set('Content-Type', 'application/json')
-    .send({ email: emailLogin, password: passwordHash })
+    .send({ email: emailLogin, password: passwordLogin })
     .then((res) => {
+      console.log(res)
       expect(res.statusCode).toBe(201);
       expect(res.body.accesToken).toEqual(res.body.accesToken);
     })

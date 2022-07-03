@@ -116,8 +116,12 @@ module.exports = {
         where: { id: req.params.id },
         include: [
           {
+            model: User,
+            attributes: ["name", "city"],
+          },
+          {
             model: Product,
-            attributes: ["product_name", "product_price"],
+            include: { all: true },
           },
           {
             model: Offer,

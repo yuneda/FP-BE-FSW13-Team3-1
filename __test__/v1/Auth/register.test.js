@@ -1,6 +1,4 @@
-const { INTEGER } = require('sequelize');
 const request = require('supertest');
-// const bcrypt = require('bcryptjs');
 const app = require('../../../app');
 const { User } = require('../../../app/models');
 
@@ -35,8 +33,6 @@ describe('Register', () => {
       password: '123456',
     })
     .then((res) => {
-      // console.log(res.statusCode)
-      // console.log(res.body)
       expect(res.statusCode).toBe(422);
       expect(res.body).toEqual({
         error: {

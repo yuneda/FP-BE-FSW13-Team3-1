@@ -38,6 +38,70 @@ module.exports = {
         include: [
           {
             model: User,
+            include: { all: true },
+          },
+          {
+            model: Product,
+            include: { all: true },
+          },
+        ],
+      })
+      .then((data, count) => {
+        res.status(200).json({
+          status: "OK",
+          data: {
+            offer: data
+          },
+          meta: { total: count },
+        });
+      })
+      .catch((err) => {
+        res.status(400).json({
+          status: "FAIL",
+          message: err.message,
+        });
+      });
+  },
+
+  show(req, res) {
+    offerService
+      .getOne({
+        where: { id: req.params.id },
+        include: [
+          {
+            model: User,
+            include: { all: true },
+          },
+          {
+            model: Product,
+            include: { all: true },
+          },
+        ],
+      })
+      .then((data, count) => {
+        res.status(200).json({
+          status: "OK",
+          data: {
+            offer: data
+          },
+          meta: { total: count },
+        });
+      })
+      .catch((err) => {
+        res.status(400).json({
+          status: "FAIL",
+          message: err.message,
+        });
+      });
+  },
+
+  show(req, res) {
+    offerService
+      .getOne({
+        where: { id: req.params.id },
+        include: [
+          {
+            model: User,
             attributes: ["name", "city"],
           },
           {

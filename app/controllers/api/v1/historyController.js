@@ -79,22 +79,16 @@ module.exports = {
     historyService
       .list({
         include: [
-          // {
-          //   model: User, // null bcs 2 user, should be call id_user from offer
-          //   attributes: ["name"],
-          // },
           {
-            model: User, // null bcs 2 user, should be call id_user from offer
+            model: User,
             attributes: ["name", "city"],
           },
           {
             model: Product,
-            // attributes: ["product_name", "product_price"],
             include: { all: true },
           },
           {
             model: Offer,
-            // attributes: ["id_product", "bid_price"],
             include: { all: true },
           },
         ],
@@ -122,8 +116,12 @@ module.exports = {
         where: { id: req.params.id },
         include: [
           {
+            model: User,
+            attributes: ["name", "city"],
+          },
+          {
             model: Product,
-            attributes: ["product_name", "product_price"],
+            include: { all: true },
           },
           {
             model: Offer,
@@ -151,7 +149,6 @@ module.exports = {
         where: {
           [Op.or]: [{ id_buyer: req.user.id }, { id_seller: req.user.id }],
         },
-        // where: { id_buyer: req.user.id, id_seller: req.user.id },
         include: [
           {
             model: Product,

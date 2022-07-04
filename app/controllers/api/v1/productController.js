@@ -10,7 +10,7 @@ function filterData(data, userFilter) {
   const dataFilter = data.data.filter((product) => {
     return product.category == userFilter;
   })
-  return dataFilter;
+  return {data: dataFilter};
 }
 
 function filterStatus(data, userFilter) {
@@ -61,9 +61,9 @@ module.exports = {
       .then((data, count) => {
         let result;
         result = data;
-        console.log(req.body.filter)
-        if (req.body.filter) {
-          const newData = filterData(data, req.body.filter);
+        console.log(req.query)
+        if (req.query.filter) {
+          const newData = filterData(data, req.query.filter);
           result = newData;
         }
         res.status(200).json({

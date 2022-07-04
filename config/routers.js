@@ -73,9 +73,13 @@ appRouter.put(
 );
 
 // Product with status available or interested
-appRouter.get("/api/v1/product", controllers.api.v1.productController.list);
-// Product all status from id user for daftar jual page
 appRouter.get(
+  "/api/v1/product",
+  controllers.api.v1.productController.list
+);
+
+// Product all status from id user for daftar jual page
+appRouter.post(
   "/api/v1/allproduct",
   middlewares.authorization.authorize,
   controllers.api.v1.productController.haveProduct
@@ -117,6 +121,12 @@ appRouter.get(
   "/api/v1/offer",
   middlewares.authorization.authorize,
   controllers.api.v1.offerController.list
+);
+
+appRouter.get(
+  "/api/v1/offer/:id",
+  middlewares.authorization.authorize,
+  controllers.api.v1.offerController.show
 );
 
 // SALE ROUTE

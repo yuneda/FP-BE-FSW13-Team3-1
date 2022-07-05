@@ -23,7 +23,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      id_user: 1,
+      id_user: 2,
       product_name: 'Sepeda',
       product_price: 2000000,
       category: 'Kendaraan',
@@ -34,7 +34,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      id_user: 1,
+      id_user: 3,
       product_name: 'Tas Gunung',
       product_price: 200000,
       category: 'Hobi',
@@ -45,7 +45,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      id_user: 1,
+      id_user: 4,
       product_name: 'Baju A',
       product_price: 50000,
       category: 'Baju',
@@ -56,7 +56,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      id_user: 1,
+      id_user: 5,
       product_name: 'Oppo X',
       product_price: 2500000,
       category: 'Elektronik',
@@ -73,18 +73,18 @@ module.exports = {
       category: 'Kendaraan',
       description: 'Hitam',
       image: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeSp8zdpYNe2BB65Rh5tEnDbrNfrleGgy3ZA&usqp=CAU', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeSp8zdpYNe2BB65Rh5tEnDbrNfrleGgy3ZA&usqp=CAU'],
-      status: 'available',
+      status: 'interested',
       createdAt: new Date(),
       updatedAt: new Date()
     },
     {
-      id_user: 1,
+      id_user: 2,
       product_name: 'Supra GTR',
       product_price: 20000000,
       category: 'Kendaraan',
       description: 'Hitam',
       image: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQecnxKZrnTsO9fWR__ywcHzONLR3PhdpAOGg&usqp=CAU', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQecnxKZrnTsO9fWR__ywcHzONLR3PhdpAOGg&usqp=CAU'],
-      status: 'available',
+      status: 'sold',
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});

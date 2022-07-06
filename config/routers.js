@@ -53,8 +53,8 @@ appRouter.put(
 appRouter.post(
   "/api/v1/product",
   middlewares.authorization.authorize,
-  multerUploads,
-  controllers.api.v1.imageController.multerUploads,
+  // multerUploads,
+  // controllers.api.v1.imageController.multerUploads,
   controllers.api.v1.productController.create,
   controllers.api.v1.historyController.create
 );

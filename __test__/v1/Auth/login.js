@@ -2,21 +2,21 @@ const request = require('supertest');
 const app = require('../../../app');
 
 describe('Login', () => {
-  const emailLogin = 'admin@mail.com';
+  const emailLogin = 'admin@gmail.com';
   const emailNotRegistered = 'custnotregis@mail.com';
   const passwordLogin = '123456';
   const passwordNotRegistered = 'custnotregis';
 
-  it('Login success, status code 201', async () => request(app)
+  it('Login success, status code 200', async () => request(app)
     .post('/api/v1/login')
     .set('Content-Type', 'application/json')
     .send({ email: emailLogin, password: passwordLogin })
     .then((res) => {
       expect(res.statusCode).toBe(200);
       expect(res.body.accesToken).toEqual(res.body.accesToken);
-    }))
+  }))
 
-  it('Login status code 404', async () => request(app)
+  it('Login email not registered, status code 404', async () => request(app)
   .post('/api/v1/login')
   .set('Content-Type', 'application/json')
   .send({ email: emailNotRegistered, password: passwordNotRegistered })

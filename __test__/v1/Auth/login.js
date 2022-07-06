@@ -2,8 +2,8 @@ const request = require('supertest');
 const app = require('../../../app');
 
 describe('Login', () => {
-  const emailLogin = 'admin@gmail.com';
-  const emailNotRegistered = 'custnotregis@mail.com';
+  const emailLogin = 'lailla@gmail.com';
+  const emailNotRegistered = 'custnotregis@gmail.com';
   const passwordLogin = '123456';
   const passwordNotRegistered = 'custnotregis';
 

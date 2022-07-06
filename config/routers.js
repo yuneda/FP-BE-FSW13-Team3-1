@@ -129,19 +129,6 @@ appRouter.get(
   controllers.api.v1.offerController.show
 );
 
-// SALE ROUTE
-appRouter.post(
-  "/api/v1/sale",
-  middlewares.authorization.authorize,
-  controllers.api.v1.saleController.create
-);
-
-appRouter.get(
-  "/api/v1/sale",
-  middlewares.authorization.authorize,
-  controllers.api.v1.saleController.list
-);
-
 // HISTORY ROUTE
 appRouter.post(
   "/api/v1/history",

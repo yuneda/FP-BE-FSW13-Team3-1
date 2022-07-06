@@ -136,11 +136,11 @@ appRouter.post(
   controllers.api.v1.historyController.createAccOffer
 );
 
-appRouter.get(
-  "/api/v1/history",
-  // middlewares.authorization.authorize,
-  controllers.api.v1.historyController.list
-);
+// appRouter.get(
+//   "/api/v1/history",
+//   // middlewares.authorization.authorize,
+//   controllers.api.v1.historyController.list
+// );
 
 // history by id
 appRouter.get(

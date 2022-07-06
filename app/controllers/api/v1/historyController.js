@@ -75,40 +75,40 @@ module.exports = {
     return;
   },
 
-  list(req, res) {
-    historyService
-      .list({
-        include: [
-          {
-            model: User,
-            attributes: ["name", "city"],
-          },
-          {
-            model: Product,
-            include: { all: true },
-          },
-          {
-            model: Offer,
-            include: { all: true },
-          },
-        ],
-      })
-      .then((data, count) => {
-        res.status(200).json({
-          status: "OK",
-          data: {
-            history: data,
-          },
-          meta: { total: count },
-        });
-      })
-      .catch((err) => {
-        res.status(400).json({
-          status: "FAIL",
-          message: err.message,
-        });
-      });
-  },
+  // list(req, res) {
+  //   historyService
+  //     .list({
+  //       include: [
+  //         {
+  //           model: User,
+  //           attributes: ["name", "city"],
+  //         },
+  //         {
+  //           model: Product,
+  //           include: { all: true },
+  //         },
+  //         {
+  //           model: Offer,
+  //           include: { all: true },
+  //         },
+  //       ],
+  //     })
+  //     .then((data, count) => {
+  //       res.status(200).json({
+  //         status: "OK",
+  //         data: {
+  //           history: data,
+  //         },
+  //         meta: { total: count },
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       res.status(400).json({
+  //         status: "FAIL",
+  //         message: err.message,
+  //       });
+  //     });
+  // },
 
   show(req, res) {
     historyService
@@ -149,6 +149,7 @@ module.exports = {
         where: {
           [Op.or]: [{ id_buyer: req.user.id }, { id_seller: req.user.id }],
         },
+        order: [['id', 'DESC']],
         include: [
           {
             model: Product,
@@ -158,7 +159,7 @@ module.exports = {
             model: Offer,
             include: { all: true },
           },
-        ],
+        ]
       })
       .then((history) => {
         res.status(200).json({

@@ -3,12 +3,7 @@ const app = require('../../../app');
 const { Product } = require('../../../app/models')
 
 describe('GET, /api/v1/product', () => {
-  let tokenUser;
-  let falseToken = 'abcdef';
-
-  // create product + upload file + create history
-
-  it('Add product with status code 201', async () => request(app)
+  it('Add product with status code 200', async () => request(app)
     .get('/api/v1/product')
     .set('Accept', 'application/json')
     .then((res) => {

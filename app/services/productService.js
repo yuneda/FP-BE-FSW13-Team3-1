@@ -16,11 +16,11 @@ module.exports = {
   async list(args) {
     try {
       const product = await productRepository.findAll(args);
-      // const productCount = await productRepository.getTotalProduct(args);
+      const productCount = await productRepository.getTotalProduct(args);
 
       return {
         data: product,
-        // count: productCount,
+        count: productCount,
       };
     } catch (err) {
       throw err;

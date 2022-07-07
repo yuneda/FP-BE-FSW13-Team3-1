@@ -135,9 +135,9 @@ module.exports = {
           result = newData;
         }
 
-        if (result == '') {
-          res.status(404).json({
-            status: "FAIL",
+        if (result.length == 0) {
+          res.status(200).json({
+            status: "OK",
             message: "Doesn't have product",
           });
         } else {

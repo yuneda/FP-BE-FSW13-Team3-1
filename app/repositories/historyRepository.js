@@ -14,11 +14,7 @@ module.exports = {
   },
 
   findAll(args) {
-    return History.findAll(args, {
-      order: [
-        ['id', 'DESC']
-      ]
-    });
+    return History.findAll(args);
   },
 
   getTotalHistory(args) {

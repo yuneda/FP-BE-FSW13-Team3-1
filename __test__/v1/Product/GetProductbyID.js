@@ -15,14 +15,14 @@ describe('GET, /api/v1/product', () => {
       status : 'available'
     })
   })
+
   afterAll(() => product.destroy() )
+  
   it('Add product with status code 201', async () => request(app)
     .get(`/api/v1/product/${product.id}`)
     .set('Accept', 'application/json')
     .then((res) => {
       expect(res.statusCode).toBe(200);
-      // console.log(res.statusCode) 
-      // console.log(res.body)
       expect(res.body).toEqual({
         status : expect.any(String),
         data : expect.any(Object)

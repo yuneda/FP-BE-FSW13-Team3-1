@@ -149,7 +149,6 @@ module.exports = {
         where: {
           [Op.or]: [{ id_buyer: req.user.id }, { id_seller: req.user.id }],
         },
-        order: [['id', 'DESC']],
         include: [
           {
             model: Product,
@@ -159,7 +158,8 @@ module.exports = {
             model: Offer,
             include: { all: true },
           },
-        ]
+        ],
+        order: [['id', 'DESC']]
       })
       .then((history) => {
         res.status(200).json({

@@ -32,9 +32,7 @@ describe("GET, /api/v1/notif", () => {
       password: "123456",
     });
     tokenUser = loginBuyer.body.token;   
-    console.log(tokenUser); 
-    // console.log(loginBuyer.body);
-    // console.log(loginBuyer.body.token);
+    console.log(tokenUser);
   });
 
   afterAll(async () => {

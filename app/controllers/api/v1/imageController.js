@@ -41,7 +41,7 @@ module.exports = {
   async multerUploads(req, res, next) {
     try {
       if (req.files && req.files.length) {
-        console.log(req.files)
+        // console.log(req.files)
         cloudinaryConfig();
         const promises = req.files.map(file => {
           const base64File = dataUri(file).content;

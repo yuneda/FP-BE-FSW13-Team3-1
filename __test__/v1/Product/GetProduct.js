@@ -8,8 +8,6 @@ describe('GET, /api/v1/product', () => {
     .set('Accept', 'application/json')
     .then((res) => {
       expect(res.statusCode).toBe(200);
-      console.log(res.statusCode) 
-      console.log(res.body)
       expect(res.body).toEqual({
         status : expect.any(String),
         data : expect.any(Object),

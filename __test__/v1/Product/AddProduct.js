@@ -1,51 +1,61 @@
 const request = require('supertest');
 const app = require('../../../app');
-const { Product } = require('../../../app/models')
+const { register } = require('../../../app/controllers/api/v1/userController');
+const { Product, History, User } = require('../../../app/models')
+
+const picture = `${__dirname}/img/profile.jpg`;
+const picture2 = `${__dirname}/img/jam_tangan.jpg`;
+let registerUser;
 
 describe('POST, /api/v1/product', () => {
   let tokenUser;
   let falseToken = 'abcdef';
 
   beforeAll(async () => {
+    let password = '123456';
+    const passwordHash = await require('bcryptjs').hash(password, 10);
+    registerUser = await User.create({
+      name: 'admin testing',
+      email: 'admintesting2@gmail.com',
+      password: passwordHash,
+    });
+
     loginUser = await request(app)
       .post('/api/v1/login')
       .send({
-        email: 'lailla@gmail.com',
+        email: 'admintesting2@gmail.com',
         password: '123456',
       });
     tokenUser = loginUser.body.token;
-
-    // productTes 
+    console.log(loginUser.body)
   })
 
   afterAll(async () => {
     await Product.destroy({ where: { product_name: 'Jam Test' } });
+    await History.destroy({ where: { id_seller: loginUser.body.id } });
+    await User.destroy({ where: { id: loginUser.body.id } });
   });
 
-  // create product + upload file + create history
-
-  it('Add product with status code 201', async () => request(app)
-    .post('/api/v1/product')
-    .set('Accept', 'application/json')
-    .set('Authorization', `Bearer ${tokenUser}`)
-    .send({
-      id_user: loginUser.body.id,
-      product_name: 'Jam Test',
-      product_price: 200000,
-      category: 'Aksesoris',
-      description: 'Hitam',
-      status: 'available'
-    })
-    // .send({
-    //   id_seller: loginUser.body.id,
-    //   id_product: 'Jam Test',
-    //   id_offer: null,
-    //   id_buyer: null,
-    //   status: 'created'
-    // })
-    .then((res) => {
-      console.log(res.statusCode)
-      console.log(res.body)
-    })
-  )
+  it('Add a session', function (done) {
+    request(app).post('/api/v1/product')
+      .set('content-type', 'application/octet-stream')
+      .set('Authorization', `Bearer ${tokenUser}`)
+      .attach('files', picture)
+      .attach('files', picture2)
+      .attach({
+        id_user: loginUser.body.id,
+        product_name: 'Jam Test',
+        product_price: 200000,
+        category: 'Aksesoris',
+        description: 'Hitam',
+        status: 'available'
+      })
+      .then(response => {
+        expect(response.statusCode).toBe(201);
+        done()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  })
 })

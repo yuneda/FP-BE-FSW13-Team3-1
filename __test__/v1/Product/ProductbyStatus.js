@@ -7,7 +7,6 @@ describe('POST, /api/v1/allproduct', () => {
     let tokenUser;
     let falseToken = 'abcdef';
     let product;
-    
   
     beforeAll(async () => { 
       const loginUser = await request(app)

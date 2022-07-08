@@ -8,7 +8,6 @@ describe('PUT, /api/v1/product/:id/statussold', () => {
   let falseToken = 'abcdef';
   let product;
 
-
   beforeAll(async () => {
     const loginUser = await request(app)
       .post('/api/v1/login')
@@ -36,8 +35,6 @@ describe('PUT, /api/v1/product/:id/statussold', () => {
     .set('Accept', 'application/json')
     .set('Authorization', `Bearer ${tokenUser}`)
     .then((res) => {
-      // console.log(res.statusCode)
-      // console.log(res.body)
       expect(res.statusCode).toBe(200);
       expect(res.body).toEqual({
         status: expect.any(String),

@@ -24,7 +24,6 @@ describe("GET, /api/v1/offer", () => {
       password: "123456",
     });
     tokenUser = loginBuyer.body.token;
-    // console.log()
   });
 
   afterAll(async () => {

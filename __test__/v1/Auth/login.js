@@ -54,19 +54,4 @@ describe('Login', () => {
       },
     });
   }))
-
-  // it('Not login status code 401', async () => request(app)
-  // .post('/api/v1/login')
-  // .set('Content-Type', 'application/json')
-  // // .send({})
-  // .then((res) => {
-  //   console.log(res.statusCode)
-  //   console.log(res.body)
-  //   // expect(res.statusCode).toBe(404);
-  //   // expect(res.body).toEqual({
-  //   //   error: {
-  //   //     message: 'Please login first'
-  //   //   },
-  //   // });
-  // }))
 })

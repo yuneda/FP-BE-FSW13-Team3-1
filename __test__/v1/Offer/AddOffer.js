@@ -24,7 +24,6 @@ describe("POST, /api/v1/offer", () => {
       password: "123456",
     });
     tokenUser = loginBuyer.body.token;
-    // console.log()
   });
 
   afterAll(async () => {
@@ -32,8 +31,6 @@ describe("POST, /api/v1/offer", () => {
     await Product.destroy({ where: { id: product.id } });
     await History.destroy({ where: { id_product: product.id} });
   });
-
-  // create product + upload file + create history
 
   it("Add offer with status code 201", async () =>
     request(app)
@@ -46,13 +43,6 @@ describe("POST, /api/v1/offer", () => {
         bid_price: 19000,
         id_seller: product.id_user,
       })
-      // .send({
-      //   id_seller: loginUser.body.id,
-      //   id_product: 'Jam Test',
-      //   id_offer: null,
-      //   id_buyer: null,
-      //   status: 'created'
-      // })
       .then((res) => {
         expect(res.statusCode).toBe(201);
         expect(res.body).toEqual({

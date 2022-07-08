@@ -66,11 +66,11 @@ appRouter.post(
   controllers.api.v1.productController.search
 );
 
-appRouter.put(
-  "/api/v1/product",
-  middlewares.authorization.authorize,
-  controllers.api.v1.productController.create
-);
+// appRouter.put(
+//   "/api/v1/product",
+//   middlewares.authorization.authorize,
+//   controllers.api.v1.productController.create
+// );
 
 // Product with status available or interested
 appRouter.get(

@@ -10,7 +10,7 @@ function filterData(data, userFilter) {
   const dataFilter = data.data.filter((product) => {
     return product.category == userFilter;
   })
-  return {data: dataFilter};
+  return { data: dataFilter };
 }
 
 function filterStatus(data, userFilter) {
@@ -33,7 +33,7 @@ module.exports = {
         //   status: "OK",
         //   data: product,
         // });
-        
+
         next();
       })
       .catch((err) => {
@@ -87,9 +87,9 @@ module.exports = {
     const status = ['available', 'interested']
     productService
       .list({
-        where: { status: status, 
-          product_name:{[Op.iLike]: `%${req.query.name}%`}
-          // product_name: sequelize.where(sequelize.fn('LOWER', sequelize.col('product_name')), 'LIKE', '%' + req.query.name + '%')
+        where: {
+          status: status,
+          product_name: { [Op.iLike]: `%${req.query.name}%` }
         },
         include: [
           {
@@ -102,7 +102,6 @@ module.exports = {
       .then((data, count) => {
         let result;
         result = data;
-        console.log(req.body.filter)
         if (req.body.filter) {
           const newData = filterData(data, req.body.filter);
           result = newData;
@@ -115,12 +114,6 @@ module.exports = {
           meta: { total: count },
         });
       })
-      .catch((err) => {
-        res.status(400).json({
-          status: "FAIL",
-          message: err.message,
-        });
-      });
   },
 
   haveProduct(req, res) {
@@ -142,9 +135,9 @@ module.exports = {
           result = newData;
         }
 
-        if (result == '') {
-          res.status(404).json({
-            status: "FAIL",
+        if (result.length == 0) {
+          res.status(200).json({
+            status: "OK",
             message: "Doesn't have product",
           });
         } else {
@@ -208,7 +201,7 @@ module.exports = {
         });
       });
   },
-  
+
 
   updateStatusSold(req, res) {
     req.body.id_user = req.user.id;

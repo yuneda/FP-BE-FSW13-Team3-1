@@ -6,6 +6,8 @@ const { uploader, cloudinaryConfig } = require("../../../middlewares/cloudinary"
 module.exports = {
   upload(req, res, next) {
     console.log('masuk')
+    console.log(req.file)
+    console.log(req.body)
     const fileBase64 = req.file.buffer.toString("base64");
     const file = `data:${req.file.mimetype};base64,${fileBase64}`;
     cloudinaryConfig();
@@ -15,7 +17,7 @@ module.exports = {
         message: "Wrong image format!",
       });
     }
-
+   
     uploader.upload(file, function (err, result) {
       console.log('masu2k')
       if (!!err) {
@@ -38,9 +40,8 @@ module.exports = {
 
   async multerUploads(req, res, next) {
     try {
-      console.log(req.url)
       if (req.files && req.files.length) {
-        console.log(req.files)
+        // console.log(req.files)
         cloudinaryConfig();
         const promises = req.files.map(file => {
           const base64File = dataUri(file).content;

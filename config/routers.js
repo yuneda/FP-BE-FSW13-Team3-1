@@ -66,11 +66,11 @@ appRouter.post(
   controllers.api.v1.productController.search
 );
 
-appRouter.put(
-  "/api/v1/product",
-  middlewares.authorization.authorize,
-  controllers.api.v1.productController.create
-);
+// appRouter.put(
+//   "/api/v1/product",
+//   middlewares.authorization.authorize,
+//   controllers.api.v1.productController.create
+// );
 
 // Product with status available or interested
 appRouter.get(
@@ -123,24 +123,11 @@ appRouter.get(
   controllers.api.v1.offerController.list
 );
 
-appRouter.get(
-  "/api/v1/offer/:id",
-  middlewares.authorization.authorize,
-  controllers.api.v1.offerController.show
-);
-
-// SALE ROUTE
-appRouter.post(
-  "/api/v1/sale",
-  middlewares.authorization.authorize,
-  controllers.api.v1.saleController.create
-);
-
-appRouter.get(
-  "/api/v1/sale",
-  middlewares.authorization.authorize,
-  controllers.api.v1.saleController.list
-);
+// appRouter.get(
+//   "/api/v1/offer/:id",
+//   middlewares.authorization.authorize,
+//   controllers.api.v1.offerController.show
+// );
 
 // HISTORY ROUTE
 appRouter.post(
@@ -149,11 +136,11 @@ appRouter.post(
   controllers.api.v1.historyController.createAccOffer
 );
 
-appRouter.get(
-  "/api/v1/history",
-  // middlewares.authorization.authorize,
-  controllers.api.v1.historyController.list
-);
+// appRouter.get(
+//   "/api/v1/history",
+//   // middlewares.authorization.authorize,
+//   controllers.api.v1.historyController.list
+// );
 
 // history by id
 appRouter.get(

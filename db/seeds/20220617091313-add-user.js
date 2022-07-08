@@ -1,5 +1,13 @@
 'use strict';
 
+const names = [
+  'Yuneda',
+  'Lailla',
+  'Tito',
+  'Ilham',
+  'Deka',
+];
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
@@ -12,17 +20,20 @@ module.exports = {
      * }], {});
     */
     const passwordHash = await require('bcryptjs').hash(process.env.USER_PASSWORD, 10);
-    await queryInterface.bulkInsert('Users', [{
-      name: 'John Doe',
-      email: 'admin@mail.com',
+
+    const users = names.map((name) => ({
+      name,
+      email: `${name.toLowerCase()}@gmail.com`,
       password: passwordHash,
-      no_tlpn: '081234567890',
-      city: 'Jakarta',
-      address: 'Jl Sudirman',
-      image: 'string',
+      no_tlpn: '',
+      city: '',
+      address: '',
+      image: '',
       createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
+      updatedAt: new Date(),
+    }));
+
+    await queryInterface.bulkInsert('Users', users, {});
   },
 
   async down(queryInterface, Sequelize) {

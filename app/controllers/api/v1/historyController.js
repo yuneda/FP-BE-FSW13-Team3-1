@@ -75,40 +75,40 @@ module.exports = {
     return;
   },
 
-  list(req, res) {
-    historyService
-      .list({
-        include: [
-          {
-            model: User,
-            attributes: ["name", "city"],
-          },
-          {
-            model: Product,
-            include: { all: true },
-          },
-          {
-            model: Offer,
-            include: { all: true },
-          },
-        ],
-      })
-      .then((data, count) => {
-        res.status(200).json({
-          status: "OK",
-          data: {
-            history: data,
-          },
-          meta: { total: count },
-        });
-      })
-      .catch((err) => {
-        res.status(400).json({
-          status: "FAIL",
-          message: err.message,
-        });
-      });
-  },
+  // list(req, res) {
+  //   historyService
+  //     .list({
+  //       include: [
+  //         {
+  //           model: User,
+  //           attributes: ["name", "city"],
+  //         },
+  //         {
+  //           model: Product,
+  //           include: { all: true },
+  //         },
+  //         {
+  //           model: Offer,
+  //           include: { all: true },
+  //         },
+  //       ],
+  //     })
+  //     .then((data, count) => {
+  //       res.status(200).json({
+  //         status: "OK",
+  //         data: {
+  //           history: data,
+  //         },
+  //         meta: { total: count },
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       res.status(400).json({
+  //         status: "FAIL",
+  //         message: err.message,
+  //       });
+  //     });
+  // },
 
   show(req, res) {
     historyService
@@ -159,6 +159,7 @@ module.exports = {
             include: { all: true },
           },
         ],
+        order: [['id', 'DESC']]
       })
       .then((history) => {
         res.status(200).json({

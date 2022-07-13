@@ -23,6 +23,9 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.History, {
         foreignKey: 'id_seller',
       })
+      // User.hasMany(models.Product, {
+      //   foreignKey: 'wishlist',
+      // })
     }
   }
   User.init({
@@ -40,7 +43,8 @@ module.exports = (sequelize, DataTypes) => {
     no_tlpn: DataTypes.STRING,
     city: DataTypes.STRING,
     address: DataTypes.STRING,
-    image: DataTypes.STRING
+    image: DataTypes.STRING,
+    wishlist: DataTypes.ARRAY(DataTypes.INTEGER)
   }, {
     sequelize,
     modelName: 'User',

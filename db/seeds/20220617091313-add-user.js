@@ -29,6 +29,7 @@ module.exports = {
       city: '',
       address: '',
       image: '',
+      wishlist: [1],
       createdAt: new Date(),
       updatedAt: new Date(),
     }));

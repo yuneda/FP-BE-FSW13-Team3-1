@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
       Product.hasMany(models.History, {
         foreignKey: 'id_product',
       })
+      // Product.belongsTo(models.User, {
+      //   foreignKey: 'id',
+      // })
     }
   }
   Product.init({

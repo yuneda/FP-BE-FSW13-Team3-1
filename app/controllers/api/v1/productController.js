@@ -184,6 +184,33 @@ module.exports = {
       });
   },
 
+  wishlist(req, res) {
+    console.log(req.user.id)
+    console.log(req.user.wishlist)
+    productService
+      .list({
+        where: { id: req.user.wishlist },
+        include: [
+          {
+            model: User,
+            attributes: ["name", "city"],
+          },
+        ],
+      })
+      .then((user) => {
+        res.status(200).json({
+          status: "OK",
+          data: user,
+        });
+      })
+      .catch((err) => {
+        res.status(422).json({
+          status: "FAIL",
+          message: err.message,
+        });
+      });
+  },
+
   update(req, res) {
     req.body.id_user = req.user.id;
     productService
@@ -201,7 +228,6 @@ module.exports = {
         });
       });
   },
-
 
   updateStatusSold(req, res) {
     req.body.id_user = req.user.id;

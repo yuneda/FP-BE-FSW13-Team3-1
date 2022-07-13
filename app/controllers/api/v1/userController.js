@@ -1,6 +1,7 @@
 const usersService = require("../../../services/userService");
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const { Product } = require("../../../models");
 
 module.exports = {
   async register(req, res) {
@@ -85,5 +86,47 @@ module.exports = {
           message: err.message,
         });
       });
+  },
+
+  addWishlist(req, res) {
+    const wishlist = req.user.wishlist;
+    const addData = [req.body.id_product, ...wishlist];
+
+    usersService
+    .updateWishlist(req.user.id, {wishlist: addData})
+    .then(() => {
+      res.status(200).json({
+        status: "OK",
+        message: "Data success updated!!",
+      });
+    })
+    .catch((err) => {
+      res.status(422).json({
+        status: "FAIL",
+        message: err.message,
+      });
+    });
+  },
+
+  deleteWishlist(req, res) {
+    const wishlist = req.user.wishlist;
+    const deleteData = wishlist.filter(function( element ) {
+      return element !== req.body.id_product
+    })
+
+    usersService
+    .updateWishlist(req.user.id, {wishlist: deleteData})
+    .then(() => {
+      res.status(200).json({
+        status: "OK",
+        message: "Data success updated!!",
+      });
+    })
+    .catch((err) => {
+      res.status(422).json({
+        status: "FAIL",
+        message: err.message,
+      });
+    });
   },
 };

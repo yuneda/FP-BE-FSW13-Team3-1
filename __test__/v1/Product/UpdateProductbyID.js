@@ -1,47 +1,48 @@
 const request = require('supertest');
 const app = require('../../../app');
-const { Product, History, User } = require('../../../app/models')
+const { Product } = require('../../../app/models')
 
 const picture = `${__dirname}/img/profile.jpg`;
 const picture2 = `${__dirname}/img/jam_tangan.jpg`;
 let registerUser;
+let product;
 
 describe('POST, /api/v1/product', () => {
   let tokenUser;
   let falseToken = 'abcdef';
 
   beforeAll(async () => {
-    let password = '123456';
-    const passwordHash = await require('bcryptjs').hash(password, 10);
-    registerUser = await User.create({
-      name: 'admin testing',
-      email: 'admintesting2@gmail.com',
-      password: passwordHash,
-    });
-
     loginUser = await request(app)
       .post('/api/v1/login')
       .send({
-        email: 'admintesting2@gmail.com',
+        email: 'lailla@gmail.com',
         password: '123456',
       });
     tokenUser = loginUser.body.token;
     console.log(loginUser.body)
+
+    product = await Product.create({
+      id_user: loginUser.body.id,
+      product_name: 'jam test',
+      product_price: 1000000,
+      category: 'string',
+      description: 'JAM AMAHAL BANGET',
+      image: null,
+      status: 'available'
+    })
   })
 
   afterAll(async () => {
     await Product.destroy({ where: { product_name: 'Jam Test' } });
-    await History.destroy({ where: { id_seller: loginUser.body.id } });
-    await User.destroy({ where: { id: loginUser.body.id } });
   });
 
-  it('Add a session', function (done) {
-    request(app).post('/api/v1/product')
+  it('Update product by id status code 200', function (done) {
+    request(app).put(`/api/v1/product/${product.id}/picture/cloudinary`)
       .set('content-type', 'application/octet-stream')
       .set('Authorization', `Bearer ${tokenUser}`)
       .attach('files', picture)
-      .attach('files', picture2)
-      .attach({
+      // .attach('files', picture2)
+      .field({
         id_user: loginUser.body.id,
         product_name: 'Jam Test',
         product_price: 200000,
@@ -50,7 +51,7 @@ describe('POST, /api/v1/product', () => {
         status: 'available'
       })
       .then(response => {
-        expect(response.statusCode).toBe(201);
+        expect(response.statusCode).toBe(200);
         done()
       })
       .catch(err => {

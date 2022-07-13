@@ -34,10 +34,22 @@ appRouter.get(
   controllers.api.v1.userController.getData
 );
 
+// appRouter.put(
+//   "/api/v1/user",
+//   middlewares.authorization.authorize,
+//   controllers.api.v1.userController.update
+// );
+
 appRouter.put(
-  "/api/v1/user",
+  "/api/v1/wishlist",
   middlewares.authorization.authorize,
-  controllers.api.v1.userController.update
+  controllers.api.v1.userController.addWishlist
+);
+
+appRouter.put(
+  "/api/v1/deletewishlist",
+  middlewares.authorization.authorize,
+  controllers.api.v1.userController.deleteWishlist
 );
 
 // Upload Image Photo User
@@ -62,15 +74,8 @@ appRouter.post(
 // SEARCH API QUERY
 appRouter.post(
   "/api/v1/product/search",
-  // middlewares.authorization.authorize,
   controllers.api.v1.productController.search
 );
-
-// appRouter.put(
-//   "/api/v1/product",
-//   middlewares.authorization.authorize,
-//   controllers.api.v1.productController.create
-// );
 
 // Product with status available or interested
 appRouter.get(
@@ -109,6 +114,12 @@ appRouter.put(
   controllers.api.v1.productController.updateStatusSold
 );
 
+appRouter.get(
+  "/api/v1/productWishlist",
+  middlewares.authorization.authorize,
+  controllers.api.v1.productController.wishlist
+);
+
 // OFFER ROUTE
 appRouter.post(
   "/api/v1/offer",
@@ -126,7 +137,7 @@ appRouter.get(
 // appRouter.get(
 //   "/api/v1/offer/:id",
 //   middlewares.authorization.authorize,
-//   controllers.api.v1.offerController.show
+  // controllers.api.v1.offerController.show
 // );
 
 // HISTORY ROUTE

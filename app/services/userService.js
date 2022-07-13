@@ -9,6 +9,10 @@ module.exports = {
     return userRepository.update(id, requestBody);
   },
 
+  updateWishlist(id, requestBody) {
+    return userRepository.updateWishlist(id, requestBody);
+  },
+
   get(id) {
     return userRepository.find(id);
   },

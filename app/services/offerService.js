@@ -1,4 +1,4 @@
-const offerRepository = require("../repositories/offerRepository")
+const offerRepository = require('../repositories/offerRepository');
 
 module.exports = {
   create(requestBody) {
@@ -14,8 +14,9 @@ module.exports = {
         data: offer,
         // count: offerCount,
       };
-    } catch (err) {
-      throw err;
+    } catch (ex) {
+      console.err(ex);
+      throw ex;
     }
   },
 
@@ -26,4 +27,4 @@ module.exports = {
   getOne(key) {
     return offerRepository.findOne(key);
   },
-}
+};

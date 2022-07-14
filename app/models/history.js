@@ -1,7 +1,7 @@
-'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class History extends Model {
     /**
@@ -13,16 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       History.belongsTo(models.Product, {
         foreignKey: 'id_product',
-      })
+      });
       History.belongsTo(models.Offer, {
         foreignKey: 'id_offer',
-      })
+      });
       History.belongsTo(models.User, {
         foreignKey: 'id_seller',
-      })
+      });
       History.belongsTo(models.User, {
         foreignKey: 'id_buyer',
-      })
+      });
     }
   }
   History.init({
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     id_offer: DataTypes.INTEGER,
     id_buyer: DataTypes.INTEGER,
     id_seller: DataTypes.INTEGER,
-    status: DataTypes.STRING
+    status: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'History',

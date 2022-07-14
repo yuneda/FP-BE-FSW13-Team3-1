@@ -1,7 +1,5 @@
-'use strict';
-
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface) {
     /**
      * Add seed commands here.
      *
@@ -20,7 +18,7 @@ module.exports = {
       image: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGEUnRDyM2OVREccY5bAERIYdejSLexg3NAw&usqp=CAU', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGEUnRDyM2OVREccY5bAERIYdejSLexg3NAw&usqp=CAU'],
       status: 'available',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       id_user: 2,
@@ -31,7 +29,7 @@ module.exports = {
       image: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlbFIMvzGpfxz47xRME_-tv4qmrQP0jd7UmA&usqp=CAU', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlbFIMvzGpfxz47xRME_-tv4qmrQP0jd7UmA&usqp=CAU'],
       status: 'available',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       id_user: 3,
@@ -42,7 +40,7 @@ module.exports = {
       image: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl-D6TbKFFwgvyzXECfBj2KVNy1I8znkIX1A&usqp=CAU', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl-D6TbKFFwgvyzXECfBj2KVNy1I8znkIX1A&usqp=CAU'],
       status: 'available',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       id_user: 4,
@@ -53,7 +51,7 @@ module.exports = {
       image: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt1i_TsrDJgMJuBTQhDH9TMhKPJO7BegGNjA&usqp=CAU', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt1i_TsrDJgMJuBTQhDH9TMhKPJO7BegGNjA&usqp=CAU'],
       status: 'available',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       id_user: 5,
@@ -64,7 +62,7 @@ module.exports = {
       image: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP8mJZRZxALG-FLhrCnU6xVIcTZEF9JORIYA&usqp=CAU', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP8mJZRZxALG-FLhrCnU6xVIcTZEF9JORIYA&usqp=CAU'],
       status: 'available',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       id_user: 1,
@@ -75,7 +73,7 @@ module.exports = {
       image: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeSp8zdpYNe2BB65Rh5tEnDbrNfrleGgy3ZA&usqp=CAU', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeSp8zdpYNe2BB65Rh5tEnDbrNfrleGgy3ZA&usqp=CAU'],
       status: 'interested',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       id_user: 2,
@@ -86,16 +84,16 @@ module.exports = {
       image: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQecnxKZrnTsO9fWR__ywcHzONLR3PhdpAOGg&usqp=CAU', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQecnxKZrnTsO9fWR__ywcHzONLR3PhdpAOGg&usqp=CAU'],
       status: 'sold',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     }], {});
   },
 
-  async down(queryInterface, Sequelize) {
+  async down() {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-  }
+  },
 };

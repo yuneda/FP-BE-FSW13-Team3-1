@@ -1,10 +1,10 @@
-const { User } = require("../models")
+const { User } = require('../models');
 
 module.exports = {
   create(createArgs) {
     return User.create(createArgs);
   },
-  
+
   update(id, updatedData) {
     return User.update(updatedData, {
       where: {

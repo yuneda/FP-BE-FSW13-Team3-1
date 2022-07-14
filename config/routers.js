@@ -1,69 +1,68 @@
-const express = require("express");
-require("dotenv").config();
-const controllers = require("../app/controllers");
-const middlewares = require("../app/middlewares");
-const uploadOnMemory = require("../app/middlewares/uploadOnMemory.");
-const upload = require("../app/middlewares/upload");
-const { multerUploads } = require("../app/middlewares/multerUpload");
+const express = require('express');
+require('dotenv').config();
+const swaggerUi = require('swagger-ui-express');
+const controllers = require('../app/controllers');
+const middlewares = require('../app/middlewares');
+const uploadOnMemory = require('../app/middlewares/uploadOnMemory.');
+const { multerUploads } = require('../app/middlewares/multerUpload');
 
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("../docs/swagger.json");
+const swaggerDocument = require('../docs/swagger.json');
 
 const appRouter = express.Router();
 const apiRouter = express.Router();
 
 /** Mount GET / handler */
-appRouter.get("/", controllers.main.index);
+appRouter.get('/', controllers.main.index);
 
 // USER ROUTE
 appRouter.post(
-  "/api/v1/register",
+  '/api/v1/register',
   middlewares.checkCondition.checkCondition,
-  controllers.api.v1.userController.register
+  controllers.api.v1.userController.register,
 );
 
 appRouter.post(
-  "/api/v1/login",
+  '/api/v1/login',
   middlewares.checkValidation.checkData,
-  controllers.api.v1.userController.login
+  controllers.api.v1.userController.login,
 );
 
 appRouter.get(
-  "/api/v1/user",
+  '/api/v1/user',
   middlewares.authorization.authorize,
-  controllers.api.v1.userController.getData
+  controllers.api.v1.userController.getData,
 );
 
 appRouter.put(
-  "/api/v1/user",
+  '/api/v1/user',
   middlewares.authorization.authorize,
-  controllers.api.v1.userController.update
+  controllers.api.v1.userController.update,
 );
 
 // Upload Image Photo User
 appRouter.put(
-  "/api/v1/user/:id/picture/cloudinary",
+  '/api/v1/user/:id/picture/cloudinary',
   middlewares.authorization.authorize,
-  uploadOnMemory.single("picture"),
+  uploadOnMemory.single('picture'),
   controllers.api.v1.imageController.upload,
-  controllers.api.v1.userController.update
+  controllers.api.v1.userController.update,
 );
 
 // PRODUCT ROUTE
 appRouter.post(
-  "/api/v1/product",
+  '/api/v1/product',
   middlewares.authorization.authorize,
   multerUploads,
   controllers.api.v1.imageController.multerUploads,
   controllers.api.v1.productController.create,
-  controllers.api.v1.historyController.create
+  controllers.api.v1.historyController.create,
 );
 
 // SEARCH API QUERY
 appRouter.post(
-  "/api/v1/product/search",
+  '/api/v1/product/search',
   // middlewares.authorization.authorize,
-  controllers.api.v1.productController.search
+  controllers.api.v1.productController.search,
 );
 
 // appRouter.put(
@@ -74,53 +73,53 @@ appRouter.post(
 
 // Product with status available or interested
 appRouter.get(
-  "/api/v1/product",
-  controllers.api.v1.productController.list
+  '/api/v1/product',
+  controllers.api.v1.productController.list,
 );
 
 // Product all status from id user for daftar jual page
 appRouter.post(
-  "/api/v1/allproduct",
+  '/api/v1/allproduct',
   middlewares.authorization.authorize,
-  controllers.api.v1.productController.haveProduct
+  controllers.api.v1.productController.haveProduct,
 );
 
-appRouter.get("/api/v1/product/:id", controllers.api.v1.productController.show);
+appRouter.get('/api/v1/product/:id', controllers.api.v1.productController.show);
 
 appRouter.put(
-  "/api/v1/product/:id",
+  '/api/v1/product/:id',
   middlewares.authorization.authorize,
-  controllers.api.v1.productController.update
+  controllers.api.v1.productController.update,
 );
 
 // upload file product
 appRouter.put(
-  "/api/v1/product/:id/picture/cloudinary",
+  '/api/v1/product/:id/picture/cloudinary',
   middlewares.authorization.authorize,
   multerUploads,
   controllers.api.v1.imageController.multerUploads,
-  controllers.api.v1.productController.update
+  controllers.api.v1.productController.update,
 );
 
 // Change status product to sold
 appRouter.put(
-  "/api/v1/product/:id/statussold",
+  '/api/v1/product/:id/statussold',
   middlewares.authorization.authorize,
-  controllers.api.v1.productController.updateStatusSold
+  controllers.api.v1.productController.updateStatusSold,
 );
 
 // OFFER ROUTE
 appRouter.post(
-  "/api/v1/offer",
+  '/api/v1/offer',
   middlewares.authorization.authorize,
   controllers.api.v1.offerController.create,
-  controllers.api.v1.historyController.create
+  controllers.api.v1.historyController.create,
 );
 
 appRouter.get(
-  "/api/v1/offer",
+  '/api/v1/offer',
   middlewares.authorization.authorize,
-  controllers.api.v1.offerController.list
+  controllers.api.v1.offerController.list,
 );
 
 // appRouter.get(
@@ -131,9 +130,9 @@ appRouter.get(
 
 // HISTORY ROUTE
 appRouter.post(
-  "/api/v1/history",
+  '/api/v1/history',
   middlewares.authorization.authorize,
-  controllers.api.v1.historyController.createAccOffer
+  controllers.api.v1.historyController.createAccOffer,
 );
 
 // appRouter.get(
@@ -144,29 +143,29 @@ appRouter.post(
 
 // history by id
 appRouter.get(
-  "/api/v1/history/:id",
+  '/api/v1/history/:id',
   // middlewares.authorization.authorize,
-  controllers.api.v1.historyController.show
+  controllers.api.v1.historyController.show,
 );
 
 // notification
 appRouter.get(
-  "/api/v1/notif",
+  '/api/v1/notif',
   middlewares.authorization.authorize,
-  controllers.api.v1.historyController.haveNotif
+  controllers.api.v1.historyController.haveNotif,
 );
 
 // Open API Document
-apiRouter.use("/api-docs", swaggerUi.serve);
-apiRouter.get("/api-docs", swaggerUi.setup(swaggerDocument));
+apiRouter.use('/api-docs', swaggerUi.serve);
+apiRouter.get('/api-docs', swaggerUi.setup(swaggerDocument));
 
 /**
  * TODO: Delete this, this is just a demonstration of
  *       error handler
  */
-apiRouter.get("/api/v1/errors", () => {
+apiRouter.get('/api/v1/errors', () => {
   throw new Error(
-    "The Industrial Revolution and its consequences have been a disaster for the human race."
+    'The Industrial Revolution and its consequences have been a disaster for the human race.',
   );
 });
 
@@ -177,9 +176,9 @@ apiRouter.use(controllers.api.main.onError);
  * TODO: Delete this, this is just a demonstration of
  *       error handler
  */
-appRouter.get("/errors", () => {
+appRouter.get('/errors', () => {
   throw new Error(
-    "The Industrial Revolution and its consequences have been a disaster for the human race."
+    'The Industrial Revolution and its consequences have been a disaster for the human race.',
   );
 });
 

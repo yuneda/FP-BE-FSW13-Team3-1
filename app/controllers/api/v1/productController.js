@@ -1,22 +1,16 @@
-const productService = require("../../../services/productService");
-const { User } = require("../../../models");
-const { query } = require("express");
-
 const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+const productService = require('../../../services/productService');
+const { User } = require('../../../models');
 
+const { Op } = Sequelize;
 
 function filterData(data, userFilter) {
-  const dataFilter = data.data.filter((product) => {
-    return product.category == userFilter;
-  })
+  const dataFilter = data.data.filter((product) => product.category === userFilter);
   return { data: dataFilter };
 }
 
 function filterStatus(data, userFilter) {
-  const statusProduct = data.data.filter((product) => {
-    return product.status == userFilter;
-  })
+  const statusProduct = data.data.filter((product) => product.status === userFilter);
   return statusProduct;
 }
 
@@ -38,22 +32,21 @@ module.exports = {
       })
       .catch((err) => {
         res.status(401).json({
-          status: "FAIL",
+          status: 'FAIL',
           message: err.message,
         });
       });
-
   },
 
   list(req, res) {
-    const status = ['available', 'interested']
+    const status = ['available', 'interested'];
     productService
       .list({
-        where: { status: status },
+        where: { status },
         include: [
           {
             model: User,
-            attributes: ["name", "city"],
+            attributes: ['name', 'city'],
           },
         ],
 
@@ -61,40 +54,38 @@ module.exports = {
       .then((data, count) => {
         let result;
         result = data;
-        console.log(req.query)
         if (req.query.filter) {
           const newData = filterData(data, req.query.filter);
           result = newData;
         }
         res.status(200).json({
-          status: "OK",
+          status: 'OK',
           data: {
-            product: result
+            product: result,
           },
           meta: { total: count },
         });
       })
       .catch((err) => {
         res.status(400).json({
-          status: "FAIL",
+          status: 'FAIL',
           message: err.message,
         });
       });
   },
 
   search(req, res) {
-    console.log(req.query)
-    const status = ['available', 'interested']
+    const status = ['available', 'interested'];
     productService
       .list({
         where: {
-          status: status,
-          product_name: { [Op.iLike]: `%${req.query.name}%` }
+          status,
+          product_name: { [Op.iLike]: `%${req.query.name}%` },
         },
         include: [
           {
             model: User,
-            attributes: ["name", "city"],
+            attributes: ['name', 'city'],
           },
         ],
 
@@ -107,13 +98,13 @@ module.exports = {
           result = newData;
         }
         res.status(200).json({
-          status: "OK",
+          status: 'OK',
           data: {
-            product: result
+            product: result,
           },
           meta: { total: count },
         });
-      })
+      });
   },
 
   haveProduct(req, res) {
@@ -123,11 +114,11 @@ module.exports = {
         include: [
           {
             model: User,
-            attributes: ["name", "city"],
+            attributes: ['name', 'city'],
           },
         ],
       })
-      .then((data, count) => {
+      .then((data) => {
         let result;
         result = data;
         if (req.body.status) {
@@ -135,16 +126,16 @@ module.exports = {
           result = newData;
         }
 
-        if (result.length == 0) {
+        if (result.length === 0) {
           res.status(200).json({
-            status: "OK",
+            status: 'OK',
             message: "Doesn't have product",
           });
         } else {
           res.status(200).json({
-            status: "OK",
+            status: 'OK',
             data: {
-              product: result
+              product: result,
             },
             // meta: { total: count },
 
@@ -153,7 +144,7 @@ module.exports = {
       })
       .catch((err) => {
         res.status(400).json({
-          status: "FAIL",
+          status: 'FAIL',
           message: err.message,
         });
       });
@@ -166,19 +157,19 @@ module.exports = {
         include: [
           {
             model: User,
-            attributes: ["name", "city"],
+            attributes: ['name', 'city'],
           },
         ],
       })
       .then((user) => {
         res.status(200).json({
-          status: "OK",
+          status: 'OK',
           data: user,
         });
       })
       .catch((err) => {
         res.status(422).json({
-          status: "FAIL",
+          status: 'FAIL',
           message: err.message,
         });
       });
@@ -190,33 +181,32 @@ module.exports = {
       .update(req.params.id, req.body)
       .then(() => {
         res.status(200).json({
-          status: "OK",
-          message: "Data Updated Successfully",
+          status: 'OK',
+          message: 'Data Updated Successfully',
         });
       })
       .catch((err) => {
         res.status(422).json({
-          status: "FAIL",
+          status: 'FAIL',
           message: err.message,
         });
       });
   },
 
-
   updateStatusSold(req, res) {
     req.body.id_user = req.user.id;
-    const status = { status: 'sold' }
+    const status = { status: 'sold' };
     productService
       .updateStatusSold(req.params.id, status)
       .then(() => {
         res.status(200).json({
-          status: "OK",
-          message: "Product Sold Successfully",
+          status: 'OK',
+          message: 'Product Sold Successfully',
         });
       })
       .catch((err) => {
         res.status(422).json({
-          status: "FAIL",
+          status: 'FAIL',
           message: err.message,
         });
       });

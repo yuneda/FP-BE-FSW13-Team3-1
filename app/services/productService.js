@@ -1,4 +1,4 @@
-const productRepository = require("../repositories/productRepository")
+const productRepository = require('../repositories/productRepository');
 
 module.exports = {
   create(requestBody) {
@@ -22,8 +22,9 @@ module.exports = {
         data: product,
         count: productCount,
       };
-    } catch (err) {
-      throw err;
+    } catch (ex) {
+      console.err(ex);
+      throw ex;
     }
   },
 

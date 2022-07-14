@@ -21,8 +21,8 @@ describe('Register', () => {
         status: expect.any(String),
         message: expect.any(String),
         data: expect.any(Object),
-      })
-    }))
+      });
+    }));
 
   it('Register with exciting mail status code 422', () => request(app)
     .post('/api/v1/register')
@@ -36,12 +36,12 @@ describe('Register', () => {
       expect(res.statusCode).toBe(422);
       expect(res.body).toEqual({
         error: {
-          message: expect.any(String)
-        }
-      })
-    }))
+          message: expect.any(String),
+        },
+      });
+    }));
 
-    it('Register with lengh password error status code 400', () => request(app)
+  it('Register with lengh password error status code 400', () => request(app)
     .post('/api/v1/register')
     .set('Accept', 'application/json')
     .send({
@@ -53,12 +53,12 @@ describe('Register', () => {
       expect(res.statusCode).toBe(400);
       expect(res.body).toEqual({
         error: {
-          message: expect.any(String)
-        }
-      })
-    }))
+          message: expect.any(String),
+        },
+      });
+    }));
 
-    it('Register with email format error status code 400', () => request(app)
+  it('Register with email format error status code 400', () => request(app)
     .post('/api/v1/register')
     .set('Accept', 'application/json')
     .send({
@@ -70,8 +70,8 @@ describe('Register', () => {
       expect(res.statusCode).toBe(400);
       expect(res.body).toEqual({
         error: {
-          message: expect.any(String)
-        }
-      })
-    }))
-})
+          message: expect.any(String),
+        },
+      });
+    }));
+});

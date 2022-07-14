@@ -1,11 +1,9 @@
 const request = require('supertest');
 const app = require('../../../app');
-const { Product } = require('../../../app/models')
-
+const { Product } = require('../../../app/models');
 
 describe('PUT, /api/v1/product/:id/statussold', () => {
   let tokenUser;
-  let falseToken = 'abcdef';
   let product;
 
   beforeAll(async () => {
@@ -24,11 +22,11 @@ describe('PUT, /api/v1/product/:id/statussold', () => {
       category: 'string',
       description: 'JAM AMAHAL BANGET',
       image: null,
-      status: 'available'
-    })
-  })
+      status: 'available',
+    });
+  });
 
-  afterAll(() => product.destroy())
+  afterAll(() => product.destroy());
 
   it('Add product with status code 200', async () => request(app)
     .put(`/api/v1/product/${product.id}/statussold`)
@@ -39,7 +37,6 @@ describe('PUT, /api/v1/product/:id/statussold', () => {
       expect(res.body).toEqual({
         status: expect.any(String),
         message: expect.any(String),
-      })
-    })
-  )
-})
+      });
+    }));
+});

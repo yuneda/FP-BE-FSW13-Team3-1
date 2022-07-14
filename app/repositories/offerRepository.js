@@ -1,4 +1,4 @@
-const { Offer } = require("../models")
+const { Offer } = require('../models');
 
 module.exports = {
   create(createArgs) {
@@ -20,4 +20,4 @@ module.exports = {
   getTotalOffer(args) {
     return Offer.count(args);
   },
-}
+};

@@ -1,5 +1,5 @@
-const api = require("./api");
-const main = require("./main");
+const api = require('./api');
+const main = require('./main');
 
 module.exports = {
   api,

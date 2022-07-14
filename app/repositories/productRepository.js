@@ -1,4 +1,4 @@
-const { Product } = require("../models")
+const { Product } = require('../models');
 
 module.exports = {
   create(createArgs) {
@@ -20,7 +20,6 @@ module.exports = {
       },
     });
   },
-
 
   find(id) {
     return Product.findByPk(id);

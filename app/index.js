@@ -1,15 +1,14 @@
-const express = require("express");
-const morgan = require("morgan");
-const path = require("path");
-const router = require("../config/routers");
-const cors = require("cors");
+const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
+const router = require('../config/routers');
 
 // const publicDir = path.join(__dirname, "../public");
 // const viewsDir = path.join(__dirname, "./views");
 const app = express();
 
 /** Install request logger */
-app.use(morgan("dev"));
+app.use(morgan('dev'));
 
 /** Install JSON request parser */
 app.use(express.json());
@@ -49,12 +48,11 @@ app.use(cors());
 //   next();
 // });
 
-
 // var allowedOrigins = ['http://localhost:3000',
 //   'https://secondhand-lilac.vercel.app/'];
 // app.use(cors({
 //   origin: function (origin, callback) {
-//     // allow requests with no origin 
+//     // allow requests with no origin
 //     // (like mobile apps or curl requests)
 //     if (!origin) return callback(null, true);
 //     if (allowedOrigins.indexOf(origin) === -1) {
@@ -66,11 +64,9 @@ app.use(cors());
 //   }
 // }));
 
-
 // app.options('*', cors());
 
 // app.use(cors({origin: '*'}));
-
 
 /** Install Router */
 app.use(router);

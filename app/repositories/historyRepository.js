@@ -1,4 +1,4 @@
-const { History } = require("../models")
+const { History } = require('../models');
 
 module.exports = {
   create(createArgs) {
@@ -20,4 +20,4 @@ module.exports = {
   getTotalHistory(args) {
     return History.count(args);
   },
-}
+};

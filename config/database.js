@@ -1,11 +1,11 @@
 require('dotenv').config();
 /** Destruct environment variable to get database configuration */
 const {
-  DB_USER = "",
-  DB_PASSWORD = "",
-  DB_HOST = "127.0.0.1",
-  DB_NAME = "final_project",
-  DB_PORT = "5432"
+  DB_USER = '',
+  DB_PASSWORD = '',
+  DB_HOST = '127.0.0.1',
+  DB_NAME = 'final_project',
+  DB_PORT = '5432',
 } = process.env;
 
 module.exports = {

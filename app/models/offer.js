@@ -1,7 +1,7 @@
-'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Offer extends Model {
     /**
@@ -13,19 +13,19 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Offer.belongsTo(models.User, {
         foreignKey: 'id_user',
-      })
+      });
       Offer.belongsTo(models.Product, {
         foreignKey: 'id_product',
-      })
+      });
       Offer.hasMany(models.History, {
         foreignKey: 'id_product',
-      })
+      });
     }
   }
   Offer.init({
     id_user: DataTypes.INTEGER,
     id_product: DataTypes.INTEGER,
-    bid_price: DataTypes.INTEGER
+    bid_price: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Offer',

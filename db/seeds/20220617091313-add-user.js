@@ -1,5 +1,3 @@
-'use strict';
-
 const names = [
   'Yuneda',
   'Lailla',
@@ -9,7 +7,7 @@ const names = [
 ];
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface) {
     /**
      * Add seed commands here.
      *
@@ -37,12 +35,12 @@ module.exports = {
     await queryInterface.bulkInsert('Users', users, {});
   },
 
-  async down(queryInterface, Sequelize) {
+  async down() {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-  }
+  },
 };

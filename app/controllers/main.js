@@ -7,13 +7,13 @@ module.exports = {
   },
 
   onLost(req, res) {
-    res.status(404).send("404");
+    res.status(404).send('404');
   },
 
-  onError(err, req, res, next) {
+  onError(err, req, res) {
     // res.status(500).send("500");
     res.status(500).json({
-      message: err.message
-    })
+      message: err.message,
+    });
   },
 };

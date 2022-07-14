@@ -1,7 +1,7 @@
-'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -13,19 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasMany(models.Product, {
         foreignKey: 'id_user',
-      })
+      });
       User.hasMany(models.Offer, {
         foreignKey: 'id_user',
-      })
+      });
       User.hasMany(models.History, {
         foreignKey: 'id_buyer',
-      })
+      });
       User.hasMany(models.History, {
         foreignKey: 'id_seller',
-      })
-      // User.hasMany(models.Product, {
-      //   foreignKey: 'wishlist',
-      // })
+      });
     }
   }
   User.init({
@@ -35,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: {
         args: true,
-        msg: "Email already used",
+        msg: 'Email already used',
       },
     },
 
@@ -44,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     address: DataTypes.STRING,
     image: DataTypes.STRING,
-    wishlist: DataTypes.ARRAY(DataTypes.INTEGER)
+    wishlist: DataTypes.ARRAY(DataTypes.INTEGER),
   }, {
     sequelize,
     modelName: 'User',

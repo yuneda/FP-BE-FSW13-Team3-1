@@ -1,4 +1,4 @@
-const usersService = require("../services/userService");
+const usersService = require('../services/userService');
 const {
   LengthPasswordError,
   WrongEmailFormatError,
@@ -14,16 +14,16 @@ module.exports = {
       return;
     }
 
-    const filter = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/g
+    const filter = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/g;
 
-    if (email == '' || email.search(filter) == -1) {
+    if (email === '' || email.search(filter) === -1) {
       const err = new WrongEmailFormatError();
       res.status(400).json(err);
       return;
     }
 
     const uniqueEmail = await usersService.getOne({
-      where: { email }
+      where: { email },
     });
 
     if (uniqueEmail) {
@@ -33,4 +33,4 @@ module.exports = {
     }
     next();
   },
-}
+};

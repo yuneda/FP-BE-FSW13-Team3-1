@@ -1,12 +1,14 @@
 {
   "name": "back-end",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node bin/www",
     "develop": "nodemon -q bin/www",
     "test": "jest",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
+    "eslint": "npx eslint ./ --resolve-plugins-relative-to . --fix",
     "db:create": "sequelize db:create",
     "db:drop": "sequelize db:drop",
     "db:migrate": "sequelize db:migrate",
@@ -31,8 +33,27 @@
     "swagger-ui-express": "^4.4.0"
   },
   "devDependencies": {
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^28.1.2",
     "nodemon": "^2.0.16",
     "supertest": "^6.2.4"
-  }
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NurAiniLaillaAsri/FP-BE-FSW13-Team3.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/NurAiniLaillaAsri/FP-BE-FSW13-Team3/issues"
+  },
+  "homepage": "https://github.com/NurAiniLaillaAsri/FP-BE-FSW13-Team3#readme",
+  "description": ""
 }

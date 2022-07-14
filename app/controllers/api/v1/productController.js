@@ -22,11 +22,6 @@ module.exports = {
       .create(req.body)
       .then((product) => {
         req.body.product = product;
-        // console.log(req.body.product.product_name)
-        // res.status(201).json({
-        //   status: "OK",
-        //   data: product,
-        // });
 
         next();
       })
@@ -137,7 +132,6 @@ module.exports = {
             data: {
               product: result,
             },
-            // meta: { total: count },
 
           });
         }
@@ -154,6 +148,33 @@ module.exports = {
     productService
       .getOne({
         where: { id: req.params.id },
+        include: [
+          {
+            model: User,
+            attributes: ['name', 'city'],
+          },
+        ],
+      })
+      .then((user) => {
+        res.status(200).json({
+          status: 'OK',
+          data: user,
+        });
+      })
+      .catch((err) => {
+        res.status(422).json({
+          status: 'FAIL',
+          message: err.message,
+        });
+      });
+  },
+
+  wishlist(req, res) {
+    console.log(req.user.id);
+    console.log(req.user.wishlist);
+    productService
+      .list({
+        where: { id: req.user.wishlist },
         include: [
           {
             model: User,

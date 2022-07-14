@@ -41,6 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     address: DataTypes.STRING,
     image: DataTypes.STRING,
+    wishlist: DataTypes.ARRAY(DataTypes.INTEGER),
   }, {
     sequelize,
     modelName: 'User',

@@ -29,6 +29,9 @@ module.exports = {
       image: {
         type: Sequelize.STRING,
       },
+      wishlist: {
+        type: Sequelize.ARRAY(Sequelize.INTEGER),
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

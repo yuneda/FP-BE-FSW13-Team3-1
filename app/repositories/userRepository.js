@@ -13,6 +13,14 @@ module.exports = {
     });
   },
 
+  updateWishlist(id, updatedData) {
+    return User.update(updatedData, {
+      where: {
+        id,
+      },
+    });
+  },
+
   find(id) {
     return User.findByPk(id);
   },

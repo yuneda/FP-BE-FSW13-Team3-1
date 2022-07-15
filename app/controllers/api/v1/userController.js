@@ -22,11 +22,6 @@ module.exports = {
             email,
           },
         });
-      }).catch((err) => {
-        res.status(400).json({
-          status: 'FAIL',
-          message: err.message,
-        });
       });
   },
 
@@ -61,12 +56,6 @@ module.exports = {
           status: 'OK',
           data: post,
         });
-      })
-      .catch((err) => {
-        res.status(422).json({
-          status: 'FAIL',
-          message: err.message,
-        });
       });
   },
 
@@ -78,13 +67,13 @@ module.exports = {
           status: 'OK',
           message: 'Data success updated!!',
         });
-      })
-      .catch((err) => {
-        res.status(422).json({
-          status: 'FAIL',
-          message: err.message,
-        });
       });
+    // .catch((err) => {
+    //   res.status(422).json({
+    //     status: 'FAIL',
+    //     message: err.message,
+    //   });
+    // });
   },
 
   addWishlist(req, res) {
@@ -92,7 +81,7 @@ module.exports = {
     const addData = [req.body.id_product, ...wishlist];
 
     usersService
-      .updateWishlist(req.user.id, { wishlist: addData })
+      .update(req.user.id, { wishlist: addData })
       .then(() => {
         res.status(200).json({
           status: 'OK',
@@ -112,17 +101,11 @@ module.exports = {
     const deleteData = wishlist.filter((element) => element !== req.body.id_product);
 
     usersService
-      .updateWishlist(req.user.id, { wishlist: deleteData })
+      .update(req.user.id, { wishlist: deleteData })
       .then(() => {
         res.status(200).json({
           status: 'OK',
           message: 'Data success updated!!',
-        });
-      })
-      .catch((err) => {
-        res.status(422).json({
-          status: 'FAIL',
-          message: err.message,
         });
       });
   },

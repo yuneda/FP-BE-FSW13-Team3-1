@@ -39,19 +39,15 @@ describe('GET, /api/v1/user', () => {
       });
     }));
 
-  // it('Can not get data user with status code 422', async () => request(app)
-  //   .get('/api/v1/user/2')
-  //   .set('Accept', 'application/json')
-  //   .set('Authorization', `Bearer ${tokenUser}`)
-  //   .then((res) => {
-  //     // console.log(tokenUser)
-  //     console.log(res.statusCode)
-  //     console.log(res.body)
-  //     // expect(res.statusCode).toBe(200);
-  //     // expect(res.body).toEqual({
-  //     //   status: expect.any(String),
-  //     //   data: expect.any(Object)
-  //     // })
-  //   })
-  // )
+  it('Can not get data user with status code 404', async () => request(app)
+    .get('/api/v1/user/9999999999999999999')
+    .set('Accept', 'application/json')
+    .set('Authorization', `Bearer ${tokenUser}`)
+    .then((res) => {
+      expect(res.statusCode).toBe(404);
+      expect(res.body).toEqual({
+        status: expect.any(String),
+        message: expect.any(String),
+      });
+    }));
 });

@@ -5,10 +5,6 @@ class EmailAlreadyTakenError extends ApplicationError {
     super(`${email} is already!`);
     this.email = email;
   }
-
-  get details() {
-    return { email: this.email };
-  }
 }
 
 module.exports = EmailAlreadyTakenError;

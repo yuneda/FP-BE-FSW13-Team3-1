@@ -67,4 +67,19 @@ describe('PUT, /api/v1/user/:id/picture/cloudinary', () => {
     .catch((err) => {
       console.log(err);
     }));
+
+  test('Successfully uploads jpg image status code 500', async () => request(app)
+    .put(`/api/v1/user/${loginUser.body.id}/picture/cloudinary`)
+    .set('Authorization', `Bearer ${tokenUser}`)
+    .field({
+      name: 'Lailla',
+      email: 'lailla@gmail.com',
+      no_tlpn: '081234567890',
+      city: 'Surabaya',
+      address: 'Surabaya',
+    })
+    .expect(500)
+    .catch((err) => {
+      console.log(err);
+    }));
 });

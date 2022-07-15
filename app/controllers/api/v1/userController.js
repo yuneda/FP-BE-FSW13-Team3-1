@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const usersService = require('../../../services/userService');
-const { EmailNotFoundError, WrongPasswordError } = require('../../../errors');
+const { EmailNotFoundError } = require('../../../errors');
 const jwt_decode = require("jwt-decode");
 
 module.exports = {

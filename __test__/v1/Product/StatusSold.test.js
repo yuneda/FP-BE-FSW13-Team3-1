@@ -2,9 +2,10 @@ const request = require('supertest');
 const app = require('../../../app');
 const { Product } = require('../../../app/models');
 
-describe('POST, /api/v1/allproduct', () => {
+describe('PUT, /api/v1/product/:id/statussold', () => {
   let tokenUser;
   let product;
+  const falseToken = 'abcdef';
 
   beforeAll(async () => {
     const loginUser = await request(app)
@@ -29,17 +30,26 @@ describe('POST, /api/v1/allproduct', () => {
   afterAll(() => product.destroy());
 
   it('Add product with status code 200', async () => request(app)
-    .post('/api/v1/allproduct')
+    .put(`/api/v1/product/${product.id}/statussold`)
     .set('Accept', 'application/json')
     .set('Authorization', `Bearer ${tokenUser}`)
-    .send({
-      status: 'available',
-    })
     .then((res) => {
       expect(res.statusCode).toBe(200);
       expect(res.body).toEqual({
         status: expect.any(String),
-        data: expect.any(Object),
+        message: expect.any(String),
+      });
+    }));
+
+  it('Add product with status code 401', async () => request(app)
+    .put(`/api/v1/product/${product.id}/statussold`)
+    .set('Accept', 'application/json')
+    .set('Authorization', `Bearer ${falseToken}`)
+    .then((res) => {
+      expect(res.statusCode).toBe(401);
+      expect(res.body).toEqual({
+        error: expect.any(String),
+        message: expect.any(String),
       });
     }));
 });

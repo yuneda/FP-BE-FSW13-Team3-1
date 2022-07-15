@@ -4,7 +4,6 @@ const { Product } = require('../../../models');
 
 module.exports = {
   create(req, res, next) {
-    // res.send(req.user.id_user)
     req.body.id_user = req.user.id;
     offerService
       .create(req.body, {
@@ -14,11 +13,6 @@ module.exports = {
         }],
       })
       .then((offer) => {
-        // console.log(offer)
-        // res.status(201).json({
-        //   status: "OK",
-        //   data: offer,
-        // });
         req.body.offer = offer;
         next();
       })
@@ -52,44 +46,12 @@ module.exports = {
           },
           meta: { total: count },
         });
-      })
-      .catch((err) => {
-        res.status(400).json({
-          status: 'FAIL',
-          message: err.message,
-        });
       });
-  },
-
-  show(req, res) {
-    offerService
-      .getOne({
-        where: { id: req.params.id },
-        include: [
-          {
-            model: User,
-            include: { all: true },
-          },
-          {
-            model: Product,
-            include: { all: true },
-          },
-        ],
-      })
-      .then((data, count) => {
-        res.status(200).json({
-          status: 'OK',
-          data: {
-            offer: data,
-          },
-          meta: { total: count },
-        });
-      })
-      .catch((err) => {
-        res.status(400).json({
-          status: 'FAIL',
-          message: err.message,
-        });
-      });
+    // .catch((err) => {
+    //   res.status(400).json({
+    //     status: 'FAIL',
+    //     message: err.message,
+    //   });
+    // });
   },
 };

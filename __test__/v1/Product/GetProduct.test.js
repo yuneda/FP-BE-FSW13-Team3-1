@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../../../app');
 
 describe('GET, /api/v1/product', () => {
-  it('Add product with status code 200', async () => request(app)
+  it('Get product with status code 200', async () => request(app)
     .get('/api/v1/product')
     .set('Accept', 'application/json')
     .then((res) => {

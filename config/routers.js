@@ -27,6 +27,11 @@ appRouter.post(
   controllers.api.v1.userController.login,
 );
 
+appRouter.post(
+  '/api/v1/logingoogle',
+  controllers.api.v1.userController.logingoogle
+);
+
 appRouter.get(
   '/api/v1/user',
   middlewares.authorization.authorize,

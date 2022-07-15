@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const usersService = require('../../../services/userService');
+const { EmailNotFoundError, WrongPasswordError } = require('../../../errors');
+const jwt_decode = require("jwt-decode");
 
 module.exports = {
   async register(req, res) {
@@ -43,6 +45,31 @@ module.exports = {
       name: user.name,
       email: user.email,
       token,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    });
+  },
+
+  async logingoogle(req, res) {
+    const tokenId = req.body.tokenId
+    const decoded = jwt_decode(tokenId);
+    const email = decoded.email;
+
+    const user = await usersService.getOne({
+      where: { email },
+    });
+
+    if (!user) {
+      const err = new EmailNotFoundError();
+      res.status(404).json(err);
+      return;
+    }
+
+    res.status(200).json({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      tokenId,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     });

@@ -1,10 +1,8 @@
 const request = require('supertest');
 const app = require('../../../app');
-const { Product } = require('../../../app/models');
 
-describe('PUT, /api/v1/product/:id/statussold', () => {
-  let tokenUser;
-  let product;
+describe('GET, /api/v1/product', () => {
+  const falseToken = 'abcdef';
 
   beforeAll(async () => {
     const loginUser = await request(app)
@@ -14,28 +12,28 @@ describe('PUT, /api/v1/product/:id/statussold', () => {
         password: '123456',
       });
     tokenUser = loginUser.body.token;
-
-    product = await Product.create({
-      id_user: 1,
-      product_name: 'jam_mehong',
-      product_price: 1000000,
-      category: 'string',
-      description: 'JAM AMAHAL BANGET',
-      image: null,
-      status: 'available',
-    });
   });
 
-  afterAll(() => product.destroy());
-
-  it('Add product with status code 200', async () => request(app)
-    .put(`/api/v1/product/${product.id}/statussold`)
+  it('Get product with status code 200', async () => request(app)
+    .get('/api/v1/productWishlist')
     .set('Accept', 'application/json')
     .set('Authorization', `Bearer ${tokenUser}`)
     .then((res) => {
       expect(res.statusCode).toBe(200);
       expect(res.body).toEqual({
         status: expect.any(String),
+        data: expect.any(Object),
+      });
+    }));
+
+  it('Get product with status code 401', async () => request(app)
+    .get('/api/v1/productWishlist')
+    .set('Accept', 'application/json')
+    .set('Authorization', `Bearer ${falseToken}`)
+    .then((res) => {
+      expect(res.statusCode).toBe(401);
+      expect(res.body).toEqual({
+        error: expect.any(String),
         message: expect.any(String),
       });
     }));

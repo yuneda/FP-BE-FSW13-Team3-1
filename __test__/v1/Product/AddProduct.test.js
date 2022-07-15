@@ -30,7 +30,7 @@ describe('POST, /api/v1/product', () => {
     await User.destroy({ where: { id: loginUser.body.id } });
   });
 
-  it('Add a session', (done) => {
+  it('Success add product with status code 201', (done) => {
     request(app)
       .post('/api/v1/product')
       .set('content-type', 'application/octet-stream')
@@ -53,4 +53,28 @@ describe('POST, /api/v1/product', () => {
         console.log(err);
       });
   });
+
+  // it('Can not add product with status code 500', (done) => {
+  //   request(app)
+  //     .post('/api/v1/product')
+  //     // .set('content-type', 'application/octet-stream')
+  //     .set('Authorization', `Bearer ${tokenUser}`)
+  //     // .attach('files', picture)
+  //     // .attach('files', picture2)
+  //     .attach({
+  //       id_user: loginUser.body.id,
+  //       product_name: 'Jam Test',
+  //       product_price: 200000,
+  //       category: 'Aksesoris',
+  //       description: 'Hitam',
+  //       status: 'available',
+  //     })
+  //     .then((response) => {
+  //       expect(response.statusCode).toBe(500);
+  //       done();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // });
 });

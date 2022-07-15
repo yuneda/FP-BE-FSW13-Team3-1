@@ -60,12 +60,6 @@ module.exports = {
           },
           meta: { total: count },
         });
-      })
-      .catch((err) => {
-        res.status(400).json({
-          status: 'FAIL',
-          message: err.message,
-        });
       });
   },
 
@@ -83,7 +77,6 @@ module.exports = {
             attributes: ['name', 'city'],
           },
         ],
-
       })
       .then((data, count) => {
         let result;
@@ -135,12 +128,6 @@ module.exports = {
 
           });
         }
-      })
-      .catch((err) => {
-        res.status(400).json({
-          status: 'FAIL',
-          message: err.message,
-        });
       });
   },
 
@@ -160,18 +147,10 @@ module.exports = {
           status: 'OK',
           data: user,
         });
-      })
-      .catch((err) => {
-        res.status(422).json({
-          status: 'FAIL',
-          message: err.message,
-        });
       });
   },
 
   wishlist(req, res) {
-    console.log(req.user.id);
-    console.log(req.user.wishlist);
     productService
       .list({
         where: { id: req.user.wishlist },
@@ -187,12 +166,6 @@ module.exports = {
           status: 'OK',
           data: user,
         });
-      })
-      .catch((err) => {
-        res.status(422).json({
-          status: 'FAIL',
-          message: err.message,
-        });
       });
   },
 
@@ -204,12 +177,6 @@ module.exports = {
         res.status(200).json({
           status: 'OK',
           message: 'Data Updated Successfully',
-        });
-      })
-      .catch((err) => {
-        res.status(422).json({
-          status: 'FAIL',
-          message: err.message,
         });
       });
   },
@@ -223,12 +190,6 @@ module.exports = {
         res.status(200).json({
           status: 'OK',
           message: 'Product Sold Successfully',
-        });
-      })
-      .catch((err) => {
-        res.status(422).json({
-          status: 'FAIL',
-          message: err.message,
         });
       });
   },

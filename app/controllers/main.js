@@ -11,7 +11,6 @@ module.exports = {
   },
 
   onError(err, req, res) {
-    // res.status(500).send("500");
     res.status(500).json({
       message: err.message,
     });

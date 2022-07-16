@@ -28,8 +28,13 @@ appRouter.post(
 );
 
 appRouter.post(
+  '/api/v1/googleregis',
+  controllers.api.v1.userController.logingoogleregis
+);
+
+appRouter.post(
   '/api/v1/logingoogle',
-  controllers.api.v1.userController.logingoogle
+  controllers.api.v1.userController.logingoogletoken
 );
 
 appRouter.get(

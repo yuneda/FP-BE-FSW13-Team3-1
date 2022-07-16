@@ -95,12 +95,6 @@ module.exports = {
           message: 'Data success updated!!',
         });
       });
-    // .catch((err) => {
-    //   res.status(422).json({
-    //     status: 'FAIL',
-    //     message: err.message,
-    //   });
-    // });
   },
 
   addWishlist(req, res) {

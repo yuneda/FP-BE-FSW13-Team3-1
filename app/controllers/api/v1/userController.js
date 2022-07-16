@@ -50,28 +50,96 @@ module.exports = {
     });
   },
 
-  async logingoogle(req, res) {
+  // async logingoogle(req, res) {
+  //   const tokenId = req.body.tokenId
+  //   const decoded = jwt_decode(tokenId);
+  //   const email = decoded.email;
+
+  //   const user = await usersService.getOne({
+  //     where: { email },
+  //   });
+
+  //   if (!user) {
+  //     const err = new EmailNotFoundError();
+  //     res.status(404).json(err);
+  //     return;
+  //   }
+
+  //   res.status(200).json({
+  //     id: user.id,
+  //     name: user.name,
+  //     email: user.email,
+  //     tokenId,
+  //     createdAt: user.createdAt,
+  //     updatedAt: user.updatedAt,
+  //   });
+  // },
+
+  async logingoogleregis(req, res) {
     const tokenId = req.body.tokenId
     const decoded = jwt_decode(tokenId);
     const email = decoded.email;
+    const name = decoded.name;
+    password = '1234567'
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    console.log(decoded)
 
     const user = await usersService.getOne({
       where: { email },
     });
 
     if (!user) {
-      const err = new EmailNotFoundError();
-      res.status(404).json(err);
-      return;
+      usersService.create({
+        name,
+        email: email.toLowerCase(),
+        password: hashedPassword,
+      })
+        .then((createdUser) => {
+          const token = jwt.sign({
+            name: createdUser.name,
+            email: createdUser.email
+          }, process.env.JWT_PRIVATE_KEY || 'rahasia', {
+            expiresIn: '24h',
+          });
+          res.status(200).json({
+            name: createdUser.name,
+            email: createdUser.email,
+            token
+          });
+        });
+    } else {
+      const token = jwt.sign({
+        name: user.name,
+        email: user.email
+      }, process.env.JWT_PRIVATE_KEY || 'rahasia', {
+        expiresIn: '24h',
+      });
+      res.status(200).json({
+        name: user.name,
+        email: user.email,
+        token
+      });
     }
+  },
+
+  async logingoogletoken(req, res) {
+    const tokenId = req.body.tokenId
+    const decoded = jwt_decode(tokenId);
+
+    console.log(decoded)
+
+    const token = jwt.sign({
+      name: decoded.name,
+      email: decoded.email,
+    }, process.env.JWT_PRIVATE_KEY || 'rahasia', {
+      expiresIn: '24h',
+    });
 
     res.status(200).json({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      tokenId,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
+      name: decoded.name,
+      email: decoded.email,
+      token,
     });
   },
 

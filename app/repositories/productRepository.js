@@ -13,14 +13,6 @@ module.exports = {
     });
   },
 
-  updateStatus(id, updateArgs) {
-    return Product.update(updateArgs, {
-      where: {
-        id,
-      },
-    });
-  },
-
   find(id) {
     return Product.findByPk(id);
   },

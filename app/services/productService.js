@@ -9,10 +9,6 @@ module.exports = {
     return productRepository.update(id, requestBody);
   },
 
-  updateStatusSold(id, status) {
-    return productRepository.updateStatus(id, status);
-  },
-
   async list(args) {
     try {
       const product = await productRepository.findAll(args);

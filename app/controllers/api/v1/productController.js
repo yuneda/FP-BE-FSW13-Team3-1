@@ -10,6 +10,7 @@ function filterData(data, userFilter) {
 }
 
 function filterStatus(data, userFilter) {
+  console.log(data.data)
   const statusProduct = data.data.filter((product) => product.status === userFilter);
   return statusProduct;
 }
@@ -98,7 +99,9 @@ module.exports = {
   haveProduct(req, res) {
     productService
       .list({
-        where: { id_user: req.user.id },
+        where: {
+          id_user: req.user.id
+        },
         include: [
           {
             model: User,
@@ -109,8 +112,9 @@ module.exports = {
       .then((data) => {
         let result;
         result = data;
-        if (req.body.status) {
-          const newData = filterStatus(data, req.body.status);
+
+        if (req.query.status) {
+          const newData = filterStatus(data, req.query.status);
           result = newData;
         }
 
@@ -181,17 +185,33 @@ module.exports = {
       });
   },
 
-  updateStatusSold(req, res) {
-    req.body.id_user = req.user.id;
-    const status = { status: 'sold' };
-    productService
-      .updateStatusSold(req.params.id, status)
-      .then(() => {
-        res.status(200).json({
-          status: 'OK',
-          message: 'Product Sold Successfully',
+  updateStatus(req, res) {
+    if (req.url === `/api/v1/product/${req.params.id}/statussold`) {
+      req.body.id_user = req.user.id;
+      const status = { status: 'sold' };
+      productService
+        .update(req.params.id, status)
+        .then(() => {
+          res.status(200).json({
+            status: 'OK',
+            message: 'Product Sold Successfully',
+          });
         });
-      });
+      return;
+    }
+    if (req.url === '/api/v1/offer') {
+      req.body.id_user = req.user.id;
+      const status = { status: 'interested' };
+      productService
+        .update(req.body.history.id_product, status)
+        .then(() => {
+          res.status(200).json({
+            status: 'OK',
+            message: 'Product Interested Successfully',
+          });
+        });
+      return;
+    }
   },
 
 };

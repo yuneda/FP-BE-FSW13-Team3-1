@@ -3,7 +3,7 @@ const historyService = require('../../../services/historyService');
 const { User, Product, Offer } = require('../../../models');
 
 module.exports = {
-  create(req, res) {
+  create(req, res, next) {
     if (req.url === '/api/v1/product') {
       req.body.id_seller = req.user.id;
       req.body.id_product = req.body.product.id;
@@ -26,10 +26,9 @@ module.exports = {
       historyService
         .create(req.body)
         .then((history) => {
-          res.status(201).json({
-            status: 'OK',
-            data: history,
-          });
+          req.body.history = history;
+          console.log(req.body.history)
+          next();
         });
     }
   },

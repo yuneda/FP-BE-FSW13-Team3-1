@@ -87,7 +87,7 @@ appRouter.get(
 );
 
 // Product all status from id user for daftar jual page
-appRouter.post(
+appRouter.get(
   '/api/v1/allproduct',
   middlewares.authorization.authorize,
   controllers.api.v1.productController.haveProduct,
@@ -114,7 +114,7 @@ appRouter.put(
 appRouter.put(
   '/api/v1/product/:id/statussold',
   middlewares.authorization.authorize,
-  controllers.api.v1.productController.updateStatusSold,
+  controllers.api.v1.productController.updateStatus,
 );
 
 appRouter.get(
@@ -129,6 +129,7 @@ appRouter.post(
   middlewares.authorization.authorize,
   controllers.api.v1.offerController.create,
   controllers.api.v1.historyController.create,
+  controllers.api.v1.productController.updateStatus,
 );
 
 appRouter.get(

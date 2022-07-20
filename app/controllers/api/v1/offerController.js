@@ -27,7 +27,10 @@ module.exports = {
 
   list(req, res) {
     offerService
-      .list({
+      .list(req.user.id, {
+        where: {
+          id_user: req.user.id 
+        },
         include: [
           {
             model: User,

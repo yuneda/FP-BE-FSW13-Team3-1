@@ -5,14 +5,14 @@ module.exports = {
     return offerRepository.create(requestBody);
   },
 
-  async list(args) {
+  async list(id, args) {
     try {
       const offer = await offerRepository.findAll(args);
-      // const offerCount = await offerRepository.getTotalOffer(args);
+      const offerCount = await offerRepository.getTotalOffer(id);
 
       return {
         data: offer,
-        // count: offerCount,
+        count: offerCount,
       };
     } catch (ex) {
       console.err(ex);

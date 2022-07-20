@@ -8,11 +8,11 @@ module.exports = {
   async list(args) {
     try {
       const offer = await historyRepository.findAll(args);
-      // const offerCount = await historyRepository.getTotalOffer(args);
+      const offerCount = await historyRepository.getTotalHistory(args);
 
       return {
         data: offer,
-        // count: offerCount,
+        count: offerCount,
       };
     } catch (ex) {
       console.err(ex);

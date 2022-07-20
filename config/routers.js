@@ -159,6 +159,12 @@ appRouter.get(
   controllers.api.v1.historyController.haveNotif,
 );
 
+appRouter.delete(
+  "/api/v1/notif",
+  middlewares.authorization.authorize,
+  controllers.api.v1.historyController.deleteNotif
+);
+
 // Open API Document
 apiRouter.use('/api-docs', swaggerUi.serve);
 apiRouter.get('/api-docs', swaggerUi.setup(swaggerDocument));

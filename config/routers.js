@@ -131,7 +131,7 @@ appRouter.post(
   controllers.api.v1.historyController.create,
   controllers.api.v1.productController.updateStatus,
 );
-
+// count offer per product
 appRouter.get(
   '/api/v1/offer',
   middlewares.authorization.authorize,
@@ -157,6 +157,12 @@ appRouter.get(
   '/api/v1/notif',
   middlewares.authorization.authorize,
   controllers.api.v1.historyController.haveNotif,
+);
+
+appRouter.delete(
+  "/api/v1/notif",
+  middlewares.authorization.authorize,
+  controllers.api.v1.historyController.deleteNotif
 );
 
 // Open API Document

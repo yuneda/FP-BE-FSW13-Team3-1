@@ -97,4 +97,21 @@ module.exports = {
         });
       });
   },
+
+  deleteNotif(req, res) {
+    historyService
+      .deleted(req.user.id)
+      .then((history) => {
+        res.status(200).json({
+          status: 'OK',
+          data: history,
+        });
+      })
+      .catch((err) => {
+        res.status(422).json({
+          status: "FAIL",
+          message: err.message,
+        });
+      });
+  },
 };

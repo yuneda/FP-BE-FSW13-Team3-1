@@ -13,6 +13,7 @@ module.exports = {
       name,
       email: email.toLowerCase(),
       password: hashedPassword,
+      wishlist: [0]
     })
       .then((createdUser) => {
         res.status(201).json({

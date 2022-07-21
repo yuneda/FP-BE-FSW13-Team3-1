@@ -42,7 +42,7 @@ module.exports = {
         include: [
           {
             model: User,
-            attributes: ['name', 'city'],
+            include: { all: true },
           },
         ],
 
@@ -75,7 +75,7 @@ module.exports = {
         include: [
           {
             model: User,
-            attributes: ['name', 'city'],
+            include: { all: true },
           },
         ],
       })
@@ -105,7 +105,7 @@ module.exports = {
         include: [
           {
             model: User,
-            attributes: ['name', 'city'],
+            include: { all: true },
           },
         ],
       })
@@ -142,7 +142,7 @@ module.exports = {
         include: [
           {
             model: User,
-            attributes: ['name', 'city'],
+            include: { all: true },
           },
         ],
       })

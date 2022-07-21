@@ -17,7 +17,11 @@ module.exports = {
     return Offer.findAll(args);
   },
 
-  getTotalOffer(args) {
-    return Offer.count(args);
+  getTotalOffer(id) {
+    return Offer.count({
+      where: {
+        id_user: id,
+      },
+    });
   },
 };

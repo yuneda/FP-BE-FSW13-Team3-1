@@ -82,10 +82,6 @@ module.exports = {
       .then((data, count) => {
         let result;
         result = data;
-        if (req.body.filter) {
-          const newData = filterData(data, req.body.filter);
-          result = newData;
-        }
         res.status(200).json({
           status: 'OK',
           data: {

@@ -116,11 +116,5 @@ module.exports = {
           data: history,
         });
       })
-      .catch((err) => {
-        res.status(422).json({
-          status: "FAIL",
-          message: err.message,
-        });
-      });
   },
 };

@@ -3,7 +3,7 @@ const app = require('../../../app');
 const { Product, User } = require('../../../app/models');
 
 describe('POST, /api/v1/allproduct', () => {
-  let tokenUser;
+  let tokenNewUser;
   let product;
 
   beforeAll(async () => {
@@ -22,26 +22,16 @@ describe('POST, /api/v1/allproduct', () => {
         password: '123456',
       });
     tokenNewUser = loginNewUser.body.token;
-    console.log(loginNewUser.body);
-
-    const loginUser = await request(app)
-      .post('/api/v1/login')
-      .send({
-        email: 'lailla@gmail.com',
-        password: '123456',
-      });
-    tokenUser = loginUser.body.token;
 
     product = await Product.create({
-      id_user: 1,
-      product_name: 'jam_mehong',
+      id_user: loginNewUser.body.id,
+      product_name: 'Jam Test',
       product_price: 1000000,
       category: 'string',
-      description: 'JAM AMAHAL BANGET',
+      description: 'Hitam',
       image: null,
       status: 'available',
     });
-    console.log(product.id);
   });
 
   afterAll(async () => {
@@ -50,48 +40,26 @@ describe('POST, /api/v1/allproduct', () => {
   });
 
   it('Get product with status code 200', async () => request(app)
-    .post('/api/v1/allproduct')
-    .set('Accept', 'application/json')
-    .set('Authorization', `Bearer ${tokenUser}`)
-    .send({
-      status: 'available',
-    })
-    .then((res) => {
-      expect(res.statusCode).toBe(200);
-      expect(res.body).toEqual({
-        status: expect.any(String),
-        data: expect.any(Object),
-      });
-    }));
-
-  it('Get product with status code 200', async () => request(app)
-    .post('/api/v1/allproduct')
-    .set('Accept', 'application/json')
-    .set('Authorization', `Bearer ${tokenUser}`)
-    .send({
-      status: 'sold',
-    })
-    .then((res) => {
-      expect(res.statusCode).toBe(200);
-      expect(res.body).toEqual({
-        status: expect.any(String),
-        data: expect.any(Object),
-      });
-    }));
-
-  it('New user get product with status code 200', async () => request(app)
-    .post('/api/v1/allproduct')
+    .get('/api/v1/allproduct?status=available')
     .set('Accept', 'application/json')
     .set('Authorization', `Bearer ${tokenNewUser}`)
-    .send({
-      status: 'available',
-    })
     .then((res) => {
       expect(res.statusCode).toBe(200);
-      console.log(res.body);
-      // expect(res.body).toEqual({
-      //   status: expect.any(String),
-      //   data: expect.any(Object),
-      // });
+      expect(res.body).toEqual({
+        status: expect.any(String),
+        data: expect.any(Object),
+      });
+    }));
+
+  it('When does not have product status code 200', async () => request(app)
+    .get('/api/v1/allproduct?status=sold')
+    .set('Accept', 'application/json')
+    .set('Authorization', `Bearer ${tokenNewUser}`)
+    .then((res) => {
+      expect(res.statusCode).toBe(200);
+      expect(res.body).toEqual({
+        status: expect.any(String),
+        message: expect.any(String),
+      });
     }));
 });

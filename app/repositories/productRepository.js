@@ -13,10 +13,6 @@ module.exports = {
     });
   },
 
-  find(id) {
-    return Product.findByPk(id);
-  },
-
   findOne(key) {
     return Product.findOne(key);
   },

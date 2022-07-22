@@ -6,10 +6,6 @@ module.exports = {
     return History.create(createArgs);
   },
 
-  find(id) {
-    return History.findByPk(id);
-  },
-
   findOne(key) {
     return History.findOne(key);
   },

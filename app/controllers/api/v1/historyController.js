@@ -86,15 +86,6 @@ module.exports = {
             model: Offer,
             include: { all: true },
           },
-          // [
-          //   Op.fn
-          //   (
-          //     "DATE_FORMAT", 
-          //     Op.col("createdAt"), 
-          //     "%d-%m-%Y %H:%i:%s"
-          //   ),
-          //   "createtAt",
-          // ],
         ],
         order: [['id', 'DESC']],
       })

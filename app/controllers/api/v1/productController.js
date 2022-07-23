@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const productService = require('../../../services/productService');
 const { User } = require('../../../models');
-
 const { Op } = Sequelize;
 
 function filterData(data, userFilter) {
@@ -10,7 +9,6 @@ function filterData(data, userFilter) {
 }
 
 function filterStatus(data, userFilter) {
-  console.log(data.data)
   const statusProduct = data.data.filter((product) => product.status === userFilter);
   return statusProduct;
 }
@@ -23,7 +21,6 @@ module.exports = {
       .create(req.body)
       .then((product) => {
         req.body.product = product;
-
         next();
       })
       .catch((err) => {
@@ -82,10 +79,6 @@ module.exports = {
       .then((data, count) => {
         let result;
         result = data;
-        if (req.body.filter) {
-          const newData = filterData(data, req.body.filter);
-          result = newData;
-        }
         res.status(200).json({
           status: 'OK',
           data: {

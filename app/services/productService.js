@@ -24,14 +24,6 @@ module.exports = {
     }
   },
 
-  get(id) {
-    return productRepository.find(id);
-  },
-
-  filter(category) {
-    return productRepository.filter(category);
-  },
-
   getOne(key) {
     return productRepository.findOne(key);
   },

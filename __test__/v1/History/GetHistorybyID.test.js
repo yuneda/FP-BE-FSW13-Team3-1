@@ -2,9 +2,9 @@ const request = require('supertest');
 const app = require('../../../app');
 const { History } = require('../../../app/models');
 
+describe('GET, /api/v1/product', () => {
 let history;
 
-describe('GET, /api/v1/product', () => {
   beforeAll(async () => {
     history = await History.create({
       id_product: 2,

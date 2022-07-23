@@ -19,12 +19,4 @@ module.exports = {
       throw ex;
     }
   },
-
-  get(id) {
-    return offerRepository.find(id);
-  },
-
-  getOne(key) {
-    return offerRepository.findOne(key);
-  },
 };

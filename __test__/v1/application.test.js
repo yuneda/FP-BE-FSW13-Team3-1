@@ -18,14 +18,4 @@ describe('GET /', () => {
       expect(res.status).toBe(404);
       expect(res.body).toEqual({ ...res.body });
     }));
-
-  it('should return 500 server error', async () => request(app)
-    .post('/')
-    .send({
-      id_product: 1,
-    })
-    .then((res) => {
-      expect(res.status).toBe(500);
-      expect(res.body).toEqual({ ...res.body });
-    }));
 });

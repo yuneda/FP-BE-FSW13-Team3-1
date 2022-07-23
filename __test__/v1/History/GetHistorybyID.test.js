@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../../../app');
 const { History } = require('../../../app/models');
 
-describe('GET, /api/v1/product', () => {
+describe('GET, /api/v1/history', () => {
 let history;
 
   beforeAll(async () => {

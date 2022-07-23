@@ -27,7 +27,6 @@ module.exports = {
         .create(req.body)
         .then((history) => {
           req.body.history = history;
-          console.log(req.body.history)
           next();
         });
     }
@@ -87,15 +86,6 @@ module.exports = {
             model: Offer,
             include: { all: true },
           },
-          // [
-          //   Op.fn
-          //   (
-          //     "DATE_FORMAT", 
-          //     Op.col("createdAt"), 
-          //     "%d-%m-%Y %H:%i:%s"
-          //   ),
-          //   "createtAt",
-          // ],
         ],
         order: [['id', 'DESC']],
       })
@@ -105,16 +95,5 @@ module.exports = {
           data: history,
         });
       });
-  },
-
-  deleteNotif(req, res) {
-    historyService
-      .deleted(req.user.id)
-      .then((history) => {
-        res.status(200).json({
-          status: 'OK',
-          data: history,
-        });
-      })
   },
 };

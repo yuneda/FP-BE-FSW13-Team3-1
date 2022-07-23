@@ -41,7 +41,6 @@ module.exports = {
         const urls = uploadedFiles.map((file) => file.url);
         req.body.image = urls;
         next();
-        // return res.status(201).json({ urls });
       }
     } catch (err) {
       return res.status(500).send('oopsie');

@@ -23,8 +23,4 @@ module.exports = {
   getOne(key) {
     return historyRepository.findOne(key);
   },
-
-  deleted(id) {
-    return historyRepository.deleted(id);
-  },
 };

@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const productService = require('../../../services/productService');
 const { User } = require('../../../models');
-
 const { Op } = Sequelize;
 
 function filterData(data, userFilter) {
@@ -10,7 +9,6 @@ function filterData(data, userFilter) {
 }
 
 function filterStatus(data, userFilter) {
-  console.log(data.data)
   const statusProduct = data.data.filter((product) => product.status === userFilter);
   return statusProduct;
 }
@@ -23,7 +21,6 @@ module.exports = {
       .create(req.body)
       .then((product) => {
         req.body.product = product;
-
         next();
       })
       .catch((err) => {

@@ -2,11 +2,11 @@ const request = require('supertest');
 const app = require('../../../app');
 const { Product } = require('../../../app/models');
 
-let tokenUser;
-let product;
-const falseToken = 'abcdef';
-
 describe('PUT, /api/v1/wishlist', () => {
+  let tokenUser;
+  let product;
+  const falseToken = 'abcdef';
+
   beforeAll(async () => {
     const loginUser = await request(app)
       .post('/api/v1/login')
@@ -25,7 +25,6 @@ describe('PUT, /api/v1/wishlist', () => {
       image: null,
       status: 'available',
     });
-    console.log(product.id);
   });
 
   afterAll(async () => {
@@ -40,8 +39,6 @@ describe('PUT, /api/v1/wishlist', () => {
       id_product: product.id,
     })
     .then((res) => {
-      // console.log(res.statusCode)
-      // console.log(res.body)
       expect(res.statusCode).toBe(200);
       expect(res.body).toEqual({
         status: expect.any(String),

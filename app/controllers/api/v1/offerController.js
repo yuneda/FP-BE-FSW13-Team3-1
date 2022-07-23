@@ -14,7 +14,6 @@ module.exports = {
       })
       .then((offer) => {
         req.body.offer = offer;
-        console.log(req.body.offer)
         next();
       })
       .catch((err) => {

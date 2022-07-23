@@ -1,5 +1,4 @@
 const { History } = require('../models');
-const { Op } = require("sequelize");
 
 module.exports = {
   create(createArgs) {
@@ -16,13 +15,5 @@ module.exports = {
 
   getTotalHistory(args) {
     return History.count(args);
-  },
- 
-  deleted(id) {
-    return History.destroy({
-      where: {
-        [Op.or]: [{id_buyer: id}, {id_seller: id}]
-      },
-    });
   },
 };

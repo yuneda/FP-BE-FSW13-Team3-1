@@ -3,8 +3,9 @@ const app = require('../../../app');
 const { Offer, Product, History } = require('../../../app/models');
 
 describe('POST, /api/v1/history', () => {
-  let tokenUser; let product; let
-    loginBuyer;
+  let tokenUser; 
+  let product; 
+  let loginBuyer;
   const falseToken = 'abcdef';
 
   beforeAll(async () => {

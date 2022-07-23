@@ -27,16 +27,6 @@ appRouter.post(
   controllers.api.v1.userController.login,
 );
 
-// appRouter.post(
-//   '/api/v1/googleregis',
-//   controllers.api.v1.userController.logingoogleregis
-// );
-
-// appRouter.post(
-//   '/api/v1/logingoogle',
-//   controllers.api.v1.userController.logingoogletoken
-// );
-
 appRouter.get(
   '/api/v1/user',
   middlewares.authorization.authorize,
@@ -148,7 +138,6 @@ appRouter.post(
 // history by id
 appRouter.get(
   '/api/v1/history/:id',
-  // middlewares.authorization.authorize,
   controllers.api.v1.historyController.show,
 );
 
@@ -157,12 +146,6 @@ appRouter.get(
   '/api/v1/notif',
   middlewares.authorization.authorize,
   controllers.api.v1.historyController.haveNotif,
-);
-
-appRouter.delete(
-  "/api/v1/notif",
-  middlewares.authorization.authorize,
-  controllers.api.v1.historyController.deleteNotif
 );
 
 // Open API Document

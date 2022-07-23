@@ -2,9 +2,9 @@ const request = require('supertest');
 const app = require('../../../app');
 const { Product } = require('../../../app/models');
 
-let product;
-
 describe('GET, /api/v1/product', () => {
+  let product;
+  
   beforeAll(async () => {
     product = await Product.create({
       id_user: 1,

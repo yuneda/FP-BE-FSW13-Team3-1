@@ -20,10 +20,6 @@ module.exports = {
     }
   },
 
-  get(id) {
-    return historyRepository.find(id);
-  },
-
   getOne(key) {
     return historyRepository.findOne(key);
   },

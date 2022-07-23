@@ -7,6 +7,7 @@ const picture2 = `${__dirname}/img/jam_tangan.jpg`;
 
 describe('POST, /api/v1/product', () => {
   let tokenUser;
+  let falseToken = "abcdef";
 
   beforeAll(async () => {
     const password = '123456';

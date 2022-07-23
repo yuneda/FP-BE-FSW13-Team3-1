@@ -32,7 +32,7 @@ describe('POST, /api/v1/offer', () => {
     await History.destroy({ where: { id_product: product.id } });
   });
 
-  it('Add offer with status code 201', async () => request(app)
+  it('Add offer with status code 200', async () => request(app)
     .post('/api/v1/offer')
     .set('Accept', 'application/json')
     .set('Authorization', `Bearer ${tokenUser}`)
@@ -43,10 +43,10 @@ describe('POST, /api/v1/offer', () => {
       id_seller: product.id_user,
     })
     .then((res) => {
-      expect(res.statusCode).toBe(201);
+      expect(res.statusCode).toBe(200);
       expect(res.body).toEqual({
         status: expect.any(String),
-        data: expect.any(Object),
+        message: expect.any(String),
       });
     }));
 

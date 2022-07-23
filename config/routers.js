@@ -27,15 +27,15 @@ appRouter.post(
   controllers.api.v1.userController.login,
 );
 
-appRouter.post(
-  '/api/v1/googleregis',
-  controllers.api.v1.userController.logingoogleregis
-);
+// appRouter.post(
+//   '/api/v1/googleregis',
+//   controllers.api.v1.userController.logingoogleregis
+// );
 
-appRouter.post(
-  '/api/v1/logingoogle',
-  controllers.api.v1.userController.logingoogletoken
-);
+// appRouter.post(
+//   '/api/v1/logingoogle',
+//   controllers.api.v1.userController.logingoogletoken
+// );
 
 appRouter.get(
   '/api/v1/user',

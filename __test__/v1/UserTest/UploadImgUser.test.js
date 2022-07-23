@@ -3,6 +3,7 @@ const app = require('../../../app');
 
 const picture = `${__dirname}/img/profile.jpg`;
 const pdf = `${__dirname}/img/file.pdf`;
+const empty = '';
 
 describe('PUT, /api/v1/user/:id/picture/cloudinary', () => {
   let tokenUser;
@@ -36,6 +37,23 @@ describe('PUT, /api/v1/user/:id/picture/cloudinary', () => {
     }));
 
   test('Can not uploads jpg image status code 400', async () => request(app)
+    .put(`/api/v1/user/${loginUser.body.id}/picture/cloudinary`)
+    .set('content-type', 'application/octet-stream')
+    .set('Authorization', `Bearer ${tokenUser}`)
+    .attach('picture', empty)
+    .field({
+      name: 'Lailla',
+      email: 'lailla@gmail.com',
+      no_tlpn: '081234567890',
+      city: 'Surabaya',
+      address: 'Surabaya',
+    })
+    .expect(400)
+    .catch((err) => {
+      console.log(err);
+    }));
+
+    test('Can not uploads jpg image status code 400', async () => request(app)
     .put(`/api/v1/user/${loginUser.body.id}/picture/cloudinary`)
     .set('content-type', 'application/octet-stream')
     .set('Authorization', `Bearer ${tokenUser}`)

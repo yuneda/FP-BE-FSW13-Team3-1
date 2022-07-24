@@ -42,7 +42,7 @@ module.exports = {
             include: { all: true },
           },
         ],
-
+        order: [['id', 'DESC']],
       })
       .then((data, count) => {
         let result;
@@ -75,6 +75,7 @@ module.exports = {
             include: { all: true },
           },
         ],
+        order: [['id', 'DESC']],
       })
       .then((data, count) => {
         let result;
@@ -101,6 +102,7 @@ module.exports = {
             include: { all: true },
           },
         ],
+        order: [['id', 'DESC']],
       })
       .then((data) => {
         let result;
@@ -157,6 +159,7 @@ module.exports = {
             attributes: ['name', 'city'],
           },
         ],
+        order: [['id', 'DESC']],
       })
       .then((user) => {
         res.status(200).json({
